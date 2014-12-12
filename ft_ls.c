@@ -21,14 +21,15 @@
 int		can_open(struct dirent *dp)
 {
 	struct stat fileStat;
-	char		filename[512];
+	//char		filename[512];
 
-	filename = dp->d_name;
-	lstat(filename, &fileStat);
+	//filename = dp->d_name;
+	lstat(dp->d_name, &fileStat);
 	if(S_ISDIR(fileStat.st_mode) == 1)
 		return (1);
 	return (0);
 }
+
 
 void	ft_ls(char *str)
 {
