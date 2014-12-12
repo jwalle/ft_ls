@@ -15,6 +15,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+#define TEST
 #define RESET "\033[0m"
 #define BOLD "\e[1m"
 
