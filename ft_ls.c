@@ -6,16 +6,12 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 08:48:45 by jwalle            #+#    #+#             */
-/*   Updated: 2014/12/09 15:53:45 by jwalle           ###   ########.fr       */
+/*   Updated: 2014/12/13 18:22:57 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <dirent.h>
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+#include "ft_ls.h"
 
-#define TEST
 #define RESET "\033[0m"
 #define BOLD "\e[1m"
 
@@ -37,7 +33,7 @@ void	ft_ls(char *str)
 	struct dirent	*dp;
 //	struct stat		fileStat;
 	DIR				*dir;
-	int				i;
+	//int				i;
 
 	dir = opendir(str);
 	if (dir == NULL)
@@ -58,5 +54,6 @@ void	ft_ls(char *str)
 int		main()
 {
 	ft_ls("./test/");
+	options_l();
 	return (0);
 }
