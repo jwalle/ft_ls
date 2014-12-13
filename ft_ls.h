@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:36:17 by jwalle            #+#    #+#             */
-/*   Updated: 2014/12/13 18:28:40 by jwalle           ###   ########.fr       */
+/*   Updated: 2014/12/13 19:23:53 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int		choose_prog(void);
 int		options_l(void);
 int		get_info_l(void);
 int		align_info(void);
-int		sort_alph(void);
+void	sort_num(int a[], int array_size, int rev);
+void	sort_str(char **str, int array_size_str);
 int		sort_date(void);
 int		sort_size(void);
 int		sort_version(void);
