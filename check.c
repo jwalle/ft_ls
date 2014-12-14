@@ -14,9 +14,10 @@
 
 int		error(char c)
 {
-	if (c != 'l' || c != 'R' || c != 'a' || c != 'r' || c != 't'
-	|| c != 'A' || c != 'd' || c != 'g' || c != 'G' || c != 'i'
-	|| c != 'n' || c != 'S' || c != 'v')
+	//printf("c = %c\n", c);
+	if (c != 'l' && c != 'R' && c != 'a' && c != 'r' && c != 't'
+	&& c != 'A' && c != 'd' && c != 'g' && c != 'G' && c != 'i'
+	&& c != 'n' && c != 'S' && c != 'v')
 	{
 		ft_putstr("ft_ls: invalid option -- '");
 		ft_putchar(c);
@@ -29,34 +30,37 @@ int		error(char c)
 	return (1);
 }
 
-int		options(char *av)
+void		options(char *av, t_static2 *opt)
 {
 	int i;
-	static t_static2 opt;
 	
+	//printf("option\n");
 	i = 1;
-	if (av[0] != '-')
-		return (main(2, av));
+	if ((av[0] != '-') || (av[0] == '-' && !av[1]))
+	{
+		ft_ls(av, opt);
+		return ;
+	}
 	while (av[i])
 	{
 		if (av[i] == 'l')
-			opt.l = 1;
+			opt->l = 1;
 		if (av[i] == 'R')
-			opt.R = 1;
+			opt->R = 1;
 		if (av[i] == 'a')
-			opt.a = 1;
+			opt->a = 1;
 		if (av[i] == 'r')
-			opt.r = 1;
+			opt->r = 1;
 		if (av[i] == 't')
-			opt.t = 1;
+			opt->t = 1;
 		if (av[i] == 'A')
-			opt.A = 1;
+			opt->A = 1;
 		i++;
 	}
-	return (options2(av, opt));
+	options2(av, opt);
 }
 
-int		options2(char *av, t_static2 opt)
+void		options2(char *av, t_static2 *opt)
 {
 	int i;
 
@@ -78,14 +82,16 @@ int		options2(char *av, t_static2 opt)
 		if (av[i] == 'v')
 			opt->v = 1;
 		if (error(av[i]))
-			opt.error = 1;
+			return ;
 		i++;
 	}
-	return (1);
+	choose_prog(opt);
 }
 
-int		choose_prog(void)
+int		choose_prog(t_static2 *opt)
 {
+	if (opt->R)
+		printf("Option r.\n");
 	printf("placeholder choose program to run\n");
 	return (1);
 }

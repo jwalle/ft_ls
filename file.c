@@ -12,21 +12,33 @@
 
 #include "ft_ls.h"
 
-int		open_directory(void)
+void	open_directory(char *str)
 {
-	printf("placeholder open directory\n");
-	return (1);
+	DIR		*dir;
+	
+	dir = opendir(str);
+	if (dir == NULL)
+	{
+		ft_putstr("ft_ls: cannot access ");
+		ft_putstr(str);
+		ft_putstr(": No such file or directory\n");
+		//return (NULL);
+	}
+	//printf("placeholder open directory\n");
+	//return (dir);
 }
 
-int		get_content(void)
+/*struct dirent	*get_content(DIR *dir)
 {
-	printf("placeholder get_content\n");
-	return (1);
-}
+	struct dirent	*dp;
+	
+	dp = readdir(dir);
+	//printf("placeholder get_content\n");
+	return (dp);
+}*/
 
-int		close_directory(void)
+void		close_directory(DIR *dir)
 {
-	printf("placeholder close directory\n");
-	return (1);
+	(void)closedir(dir);
 }
 

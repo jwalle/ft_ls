@@ -13,7 +13,7 @@
 #include "ft_ls.h"
 
 #define RESET "\033[0m"
-#define BOLD "\e[1m"
+#define BOLD "\033[1m"
 
 int		can_open(struct dirent *dp)
 {
@@ -28,43 +28,60 @@ int		can_open(struct dirent *dp)
 }
 
 
-void	ft_ls(char *str)
+void	ft_ls(char *str, t_static2 *opt)
 {
+	DIR				*dir;
 	struct dirent	*dp;
 //	struct stat		fileStat;
-	DIR				*dir;
-	//int				i;
-
+//	int 			i;
+	
+	//printf("plop");
 	dir = opendir(str);
 	if (dir == NULL)
-		printf("Open error");
+		open_directory(str);
 	while ((dp = readdir(dir)))
 	{
-		if (dp->d_name[0] != '.')
+		if (dp->d_name[0] == '.')
+		{
+			if (can_open(dp)  && opt->a)
+				printf(BOLD "%s" RESET, dp->d_name);
+			if (!can_open(dp) && opt->a)
+				ft_putstr(dp->d_name);
+		}
+		else
 		{
 			if (can_open(dp))
-				printf(BOLD "%s\n" RESET, dp->d_name);
+				printf(BOLD "%s" RESET, dp->d_name);
 			else
-				puts(dp->d_name);
+				ft_putstr(dp->d_name);
 		}
+		ft_putstr(" ");
 	}
-	(void)closedir(dir);
+	ft_putchar('\n');
+	close_directory(dir);
 }
 
 int		main(int ac, char **av)
 {
 	int i;
-	
+	static t_static2 opt;
 	i = 1;
+	//printf("ac = %d\n", ac);
+	if (ac == 1)
+		ft_ls(".", &opt);
 	if (ac == 2)
-		ft_ls("./test/");
-	if (ac == 3)
-		options(av[1]);
-	if (ac > 3)
+		options(av[1], &opt);
+	if (ac > 2)
 	{
 		while (av[i])
 		{
-			main(2, av[i]);
+			if (i == 1)
+			{
+				options(av[i], &opt);
+				i++;
+			}
+			//printf("av = %s\n",av[i]);
+			ft_ls(av[i], &opt); // les options peuvent aller etre rentre apres le(s) dossier(s)...
 			i++;
 		}
 	}

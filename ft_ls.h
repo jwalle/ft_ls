@@ -41,25 +41,27 @@ typedef struct		s_static2
 	int				n;
 	int				S;
 	int				v;
-	int				error;
 }					t_static2;
 
-int		open_directory(void);
-int		get_content(void);
-int		close_directory(void);
-int		check(void);
-int		options(void);
-int		choose_prog(void);
-int		options_l(void);
-int		get_info_l(void);
-int		align_info(void);
-void	sort_num(int a[], int array_size, int rev);
-void	sort_str(char **str, int array_size_str);
-int		sort_date(void);
-int		sort_size(void);
-int		sort_version(void);
-int		sort_reverse(void);
-int		output(void);
-int		clean(void);
+int					main(int ac, char **av);
+void				open_directory(char *str);
+struct dirent 		*get_content(DIR *dir);
+void				close_directory(DIR *dir);
+int					error(char c);
+void				ft_ls(char *str, t_static2 *opt);
+void				options(char *av, t_static2 *opt);
+void				options2(char *av, t_static2 *opt);
+int					choose_prog(t_static2 *opt);
+int					options_l(void);
+int					get_info_l(void);
+int					align_info(void);
+void				sort_num(int a[], int array_size, int rev);
+void				sort_str(char **str, int array_size_str);
+int					sort_date(void);
+int					sort_size(void);
+int					sort_version(void);
+int					sort_reverse(void);
+int					output(void);
+int					clean(void);
 
 #endif
