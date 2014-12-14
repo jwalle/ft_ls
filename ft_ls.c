@@ -51,9 +51,22 @@ void	ft_ls(char *str)
 	(void)closedir(dir);
 }
 
-int		main()
+int		main(int ac, char **av)
 {
-	ft_ls("./test/");
-	options_l();
+	int i;
+	
+	i = 1;
+	if (ac == 2)
+		ft_ls("./test/");
+	if (ac == 3)
+		options(av[1]);
+	if (ac > 3)
+	{
+		while (av[i])
+		{
+			main(2, av[i]);
+			i++;
+		}
+	}
 	return (0);
 }

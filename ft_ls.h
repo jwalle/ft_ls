@@ -26,6 +26,23 @@
 	int		i;
 }					t_static;*/
 
+typedef struct		s_static2
+{
+	int				l;
+	int				R;
+	int				a;
+	int				r;
+	int				t;
+	int				A;
+	int				d;
+	int				g;
+	int				G;
+	int				i;
+	int				n;
+	int				S;
+	int				v;
+	int				error;
+}					t_static2;
 
 int		open_directory(void);
 int		get_content(void);
