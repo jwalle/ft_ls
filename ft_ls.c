@@ -19,11 +19,9 @@
 int		can_open(struct dirent *dp)
 {
 	struct stat fileStat;
-	//char		filename[512];
-
-	//filename = dp->d_name;
-	lstat(dp->d_name, &fileStat);
-	if(S_ISDIR(fileStat.st_mode) == 1)
+	
+	stat(dp->d_name, &fileStat);
+	if (S_ISDIR(fileStat.st_mode) == 1)
 		return (1);
 	return (0);
 }
@@ -37,48 +35,29 @@ void	ft_putstr_bold(char *str)
 
 void	ft_ls(char *str, t_static2 *opt)
 {
-//	DIR				*dir;
-//	struct dirent	*dp;
-//	struct stat		fileStat;
-//	int 			i;
-	ll_list   *ll;
-	
-	printf("plop1\n");
-	//dir = opendir(str);
-	//if (dir == NULL)
-//		open_directory(str);
+	ll_list   		*current;
 
-	//ll = NULL;
-	//ll->filename = ft_lstnew(0,0);
-	ll_stock(str);
-	printf("plop2\n");
-	//printf("1 %s", ll->filename);
-	while (ll != NULL)
+	current = ll_stock(str);
+	while (current != NULL)
 	{
-//		if (ll->filename[0] == '.')
-//		{
-//			if (/*can_open(ll)  && */opt->a)
-//				ft_putstr_bold(ll->filename);
-			/*if (!can_open(dp) && opt->a)
-				ft_putstr(ll->filename);*/
-//		}
-//		else
-//		{
-			/*if (can_open(dp))
-				ft_putstr_bold(ll->filename);*/
-			//else
-//				ft_putstr(ll->filename);
-//		}
-//		ft_putstr(" ");
-//	}
-		if (!opt->a)
+		if (current->filename[0] == '.')
 		{
-			//printf("f %s", ll->filename);
-			ll = ll->next;
-			ft_putchar('\n');
+			if ((current->isdir) && opt->a)
+				ft_putstr_bold(current->filename);
+			if (!(current->isdir) && opt->a)
+				ft_putstr(current->filename);
 		}
+		else
+		{
+			if ((current->isdir))
+				ft_putstr_bold(current->filename);
+			else
+				ft_putstr(current->filename);
+		}
+		ft_putstr(" ");
+		current = current->next;
 	}
-	//close_directory(dir);
+	ft_putchar('\n');
 }
 
 int		main(int ac, char **av)
@@ -86,7 +65,7 @@ int		main(int ac, char **av)
 	int i;
 	static t_static2 opt;
 	i = 1;
-	printf("ac = %d\n", ac);
+	//printf("ac = %d\n", ac);
 	if (ac == 1)
 		ft_ls(".", &opt);
 	if (ac == 2)

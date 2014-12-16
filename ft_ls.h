@@ -23,9 +23,10 @@
 typedef struct		element
 {
 	char			*filename;
+	int				isdir;
 	struct element	*next;
 	
-}					ll;
+}					ll_list;
 
 typedef struct		s_static2
 {
@@ -48,9 +49,10 @@ int					main(int ac, char **av);
 void				fail_open_directory(char *str);
 struct dirent 		*get_content(DIR *dir);
 void				close_directory(DIR *dir);
+int					can_open(struct dirent *dp);
 int					error(char c);
-void				ll_stock(char *str);
-ll_list				*newnode(char *content, size_t content_size);
+ll_list				*ll_stock(char *str);
+void    			ll_copy(char *str, struct dirent *dp, ll_list *new, ll_list *current, ll_list *head);
 void				ft_putstr_bold(char *str);
 void				ft_ls(char *str, t_static2 *opt);
 void				options(char *av, t_static2 *opt);
