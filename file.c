@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void	open_directory(char *str)
+void	fail_open_directory(char *str)
 {
 	DIR		*dir;
 	

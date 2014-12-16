@@ -20,11 +20,12 @@
 #include <stdio.h>		//PRINTF A RETIRER
 #include "libft.h"
 
-/*typedef struct		s_static
+typedef struct		element
 {
-	char	*buf;
-	int		i;
-}					t_static;*/
+	char			*filename;
+	struct element	*next;
+	
+}					ll;
 
 typedef struct		s_static2
 {
@@ -44,10 +45,13 @@ typedef struct		s_static2
 }					t_static2;
 
 int					main(int ac, char **av);
-void				open_directory(char *str);
+void				fail_open_directory(char *str);
 struct dirent 		*get_content(DIR *dir);
 void				close_directory(DIR *dir);
 int					error(char c);
+void				ll_stock(char *str);
+ll_list				*newnode(char *content, size_t content_size);
+void				ft_putstr_bold(char *str);
 void				ft_ls(char *str, t_static2 *opt);
 void				options(char *av, t_static2 *opt);
 void				options2(char *av, t_static2 *opt);

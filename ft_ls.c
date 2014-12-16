@@ -14,6 +14,7 @@
 
 #define RESET "\033[0m"
 #define BOLD "\033[1m"
+#define ANSI_COLOR_RED     "\x1b[31m"
 
 int		can_open(struct dirent *dp)
 {
@@ -27,38 +28,57 @@ int		can_open(struct dirent *dp)
 	return (0);
 }
 
+void	ft_putstr_bold(char *str)
+{
+	ft_putstr(ANSI_COLOR_RED);
+	ft_putstr(str);
+	ft_putstr(RESET);
+}
 
 void	ft_ls(char *str, t_static2 *opt)
 {
-	DIR				*dir;
-	struct dirent	*dp;
+//	DIR				*dir;
+//	struct dirent	*dp;
 //	struct stat		fileStat;
 //	int 			i;
+	ll_list   *ll;
 	
-	//printf("plop");
-	dir = opendir(str);
-	if (dir == NULL)
-		open_directory(str);
-	while ((dp = readdir(dir)))
+	printf("plop1\n");
+	//dir = opendir(str);
+	//if (dir == NULL)
+//		open_directory(str);
+
+	//ll = NULL;
+	//ll->filename = ft_lstnew(0,0);
+	ll_stock(str);
+	printf("plop2\n");
+	//printf("1 %s", ll->filename);
+	while (ll != NULL)
 	{
-		if (dp->d_name[0] == '.')
+//		if (ll->filename[0] == '.')
+//		{
+//			if (/*can_open(ll)  && */opt->a)
+//				ft_putstr_bold(ll->filename);
+			/*if (!can_open(dp) && opt->a)
+				ft_putstr(ll->filename);*/
+//		}
+//		else
+//		{
+			/*if (can_open(dp))
+				ft_putstr_bold(ll->filename);*/
+			//else
+//				ft_putstr(ll->filename);
+//		}
+//		ft_putstr(" ");
+//	}
+		if (!opt->a)
 		{
-			if (can_open(dp)  && opt->a)
-				printf(BOLD "%s" RESET, dp->d_name);
-			if (!can_open(dp) && opt->a)
-				ft_putstr(dp->d_name);
+			//printf("f %s", ll->filename);
+			ll = ll->next;
+			ft_putchar('\n');
 		}
-		else
-		{
-			if (can_open(dp))
-				printf(BOLD "%s" RESET, dp->d_name);
-			else
-				ft_putstr(dp->d_name);
-		}
-		ft_putstr(" ");
 	}
-	ft_putchar('\n');
-	close_directory(dir);
+	//close_directory(dir);
 }
 
 int		main(int ac, char **av)
@@ -66,7 +86,7 @@ int		main(int ac, char **av)
 	int i;
 	static t_static2 opt;
 	i = 1;
-	//printf("ac = %d\n", ac);
+	printf("ac = %d\n", ac);
 	if (ac == 1)
 		ft_ls(".", &opt);
 	if (ac == 2)
