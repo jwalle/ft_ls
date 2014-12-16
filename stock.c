@@ -28,21 +28,21 @@ ll_list     *ll_stock(char *str)
     {
         if (head == NULL)
         {
-            head = ll_copy_new(dp->d_name, dp, head);
+            head = ll_copy_new(dp->d_name, dp, head, str);
             current = head;
         }
         else
         {
             while (current->next != NULL)
                 current = current->next;
-            current = ll_copy_current(dp->d_name, dp, current);
+            current = ll_copy_current(dp->d_name, dp, current, str);
         }
     }
     close_directory(dir);
     return (head);
 }
 
-ll_list    *ll_copy_new(char *str, struct dirent *dp, ll_list *head)
+ll_list    *ll_copy_new(char *str, struct dirent *dp, ll_list *head, char *str2)
 {
     ll_list *new;
 
@@ -50,11 +50,11 @@ ll_list    *ll_copy_new(char *str, struct dirent *dp, ll_list *head)
     new->next = head;
     head = new;
     new->filename = str;
-    new->isdir = can_open(dp);
+    new->isdir = can_open(dp, str2);
     return (new);
 }
 
-ll_list    *ll_copy_current(char *str, struct dirent *dp, ll_list *current)
+ll_list    *ll_copy_current(char *str, struct dirent *dp, ll_list *current, char *str2)
 {
     ll_list *new;
 
@@ -62,6 +62,6 @@ ll_list    *ll_copy_current(char *str, struct dirent *dp, ll_list *current)
     current->next = new;
     new->next = NULL;
     new->filename = str;
-    new->isdir = can_open(dp);
+    new->isdir = can_open(dp, str2);
     return (new);
 }

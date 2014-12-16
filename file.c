@@ -42,12 +42,32 @@ void		close_directory(DIR *dir)
 	(void)closedir(dir);
 }
 
-int		can_open(struct dirent *dp)
+int		can_open(struct dirent *dp, char *str)
 {
 	struct stat fileStat;
-	
-	stat(dp->d_name, &fileStat);
+	char	*path;
+
+	path = correct_path(str, dp->d_name);
+	stat(path, &fileStat);
 	if (S_ISDIR(fileStat.st_mode) == 1)
 		return (1);
 	return (0);
+	
+	// dans stat mettre le chemin + le nom du dossier teste.
+}
+
+char	*correct_path(char *s1, char *s2)
+{
+	int		i;
+	char	*str;
+	
+	i = ft_strlen(s1);
+	str = NULL;
+	ft_strcpy(str, s1);
+	printf("plop1\n");
+	if (s1[i] != '/')
+		ft_strcat(str, "/");
+	ft_strcat(str, s2);
+	return (str);
+	printf("plop2\n");
 }
