@@ -42,3 +42,12 @@ void		close_directory(DIR *dir)
 	(void)closedir(dir);
 }
 
+int		can_open(struct dirent *dp)
+{
+	struct stat fileStat;
+	
+	stat(dp->d_name, &fileStat);
+	if (S_ISDIR(fileStat.st_mode) == 1)
+		return (1);
+	return (0);
+}

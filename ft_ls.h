@@ -20,6 +20,10 @@
 #include <stdio.h>		//PRINTF A RETIRER
 #include "libft.h"
 
+#define RESET "\033[0m"
+#define BOLD "\033[1m"
+#define ANSI_COLOR_RED     "\x1b[31m"
+
 typedef struct		element
 {
 	char			*filename;
@@ -52,7 +56,8 @@ void				close_directory(DIR *dir);
 int					can_open(struct dirent *dp);
 int					error(char c);
 ll_list				*ll_stock(char *str);
-void    			ll_copy(char *str, struct dirent *dp, ll_list *new, ll_list *current, ll_list *head);
+ll_list    			*ll_copy_new(char *str, struct dirent *dp, ll_list *head);
+ll_list				*ll_copy_current(char *str, struct dirent *dp, ll_list *current);
 void				ft_putstr_bold(char *str);
 void				ft_ls(char *str, t_static2 *opt);
 void				options(char *av, t_static2 *opt);

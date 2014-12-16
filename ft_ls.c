@@ -12,27 +12,6 @@
 
 #include "ft_ls.h"
 
-#define RESET "\033[0m"
-#define BOLD "\033[1m"
-#define ANSI_COLOR_RED     "\x1b[31m"
-
-int		can_open(struct dirent *dp)
-{
-	struct stat fileStat;
-	
-	stat(dp->d_name, &fileStat);
-	if (S_ISDIR(fileStat.st_mode) == 1)
-		return (1);
-	return (0);
-}
-
-void	ft_putstr_bold(char *str)
-{
-	ft_putstr(ANSI_COLOR_RED);
-	ft_putstr(str);
-	ft_putstr(RESET);
-}
-
 void	ft_ls(char *str, t_static2 *opt)
 {
 	ll_list   		*current;

@@ -12,6 +12,13 @@
 
 #include "ft_ls.h"
 
+void	ft_putstr_bold(char *str)
+{
+	ft_putstr(ANSI_COLOR_RED);
+	ft_putstr(str);
+	ft_putstr(RESET);
+}
+
 int		output(void)
 {
 	printf("placeholder output\n");
