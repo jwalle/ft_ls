@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:36:17 by jwalle            #+#    #+#             */
-/*   Updated: 2015/01/26 16:16:28 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/01/26 17:20:07 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,23 @@
 #include <uuid/uuid.h>
 #include <pwd.h>
 #include <grp.h>
+#include <time.h>
 #include <stdio.h>		//PRINTF A RETIRER
 #include "libft.h"
 
 #define RESET "\033[0m"
 #define BOLD "\033[1m"
 #define ANSI_COLOR_RED     "\x1b[31m"
+
+typedef	struct		s_static
+{
+	int				name_len;
+	int				link_len;
+	int				uid_len;
+	int				gid_len;
+	int				size_len;
+	int				day_len;
+}					max_len;
 
 typedef struct		element
 {
@@ -36,6 +47,7 @@ typedef struct		element
 	char			*uid;
 	char			*gid;
 	int				size;
+	time_t			time;
 	struct element	*next;
 	
 }					ll_list;
@@ -71,7 +83,7 @@ void				ft_putstr_b(char *str);
 void				ft_ls(char *str, t_static2 *opt);
 void				options(char *av, t_static2 *opt);
 void				options2(char *av, t_static2 *opt);
-int					choose_prog(t_static2 *opt);
+int					choose_prog(t_static2 *opt, char *av);
 int					options_l(void);
 int					get_info_l(void);
 int					align_info(void);
@@ -88,5 +100,7 @@ ll_list				*merge(ll_list *a, ll_list *b);
 void				split(ll_list *source, ll_list **front, ll_list **back);
 void				get_info(struct dirent *dp, ll_list *current, char *str);
 void				get_permission(struct stat fileStat, ll_list *current);
+void				print_l(ll_list *curent, t_static2 *opt);
+void				get_len(max_len *len, ll_list *current);
 
 #endif

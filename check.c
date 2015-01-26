@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:31:11 by jwalle            #+#    #+#             */
-/*   Updated: 2014/12/13 18:23:36 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/01/26 17:43:03 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,21 @@ void		options2(char *av, t_static2 *opt)
 			return ;
 		i++;
 	}
-	choose_prog(opt);
+	choose_prog(opt, av);
 }
 
-int		choose_prog(t_static2 *opt)
+int		choose_prog(t_static2 *opt, char *av)
 {
+	ll_list		*cur;
+	cur = ll_stock(".");
+	merge_sort(&cur);
+	if (opt->l)
+	{
+		print_l(cur, opt);
+		return(1);
+	}
 	if (opt->R)
-		printf("Option r.\n");
+		printf("Option r.%s\n", av);
 	printf("placeholder choose program to run\n");
 	return (1);
 }

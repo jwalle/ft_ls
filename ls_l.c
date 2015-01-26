@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:54:27 by jwalle            #+#    #+#             */
-/*   Updated: 2014/12/13 18:24:12 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/01/26 17:39:34 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,33 @@ int		options_l(void)
 	printf("placeholder options de l\n");
 	return (1);
 }
-int		get_info_l(void)
+
+void	print_l(ll_list *current, t_static2 *opt)
 {
-	printf("placeholder get info for colon\n");
-	return (1);
+	max_len *len;
+
+	len = NULL;
+	if (opt->a)
+		printf("plop");
+	get_len(len, current);
+	//temp = current;
+	ft_putchar(*current->perm);
+	ft_putchar(' ');
+	//ft_nblen();
+	//ft_putchar
 }
 
-int		align_info(void)
+void	get_len(max_len *len, ll_list *current)
 {
-	printf("placeholder align info output\n");
-	return (1);
+	int		i;
+
+	i = 0;	
+	while(current->next != NULL)
+	{
+		i = ft_strlen(current->filename);
+		if (i > len->name_len)
+			len->name_len = i;
+		current = current->next;
+	}
+	printf("taille : %d\n", len->name_len);
 }

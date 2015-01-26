@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:46:15 by jwalle            #+#    #+#             */
-/*   Updated: 2015/01/26 16:17:24 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/01/26 17:45:07 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,10 @@ void	get_info(struct dirent *dp, ll_list *current, char *str)
 	grp = getgrgid(fileStat.st_gid);
 	current->gid = grp->gr_name;
 	current->size = fileStat.st_size;
+	current->time = fileStat.st_mtime;
 
-	printf("%s, %d\n", current->uid, current->size);
-	printf("%d\n", current->link);
+	//printf("%s, %d, %s\n", current->uid, current->size, ctime(&current->time));
+	//printf("%d\n", current->link);
 }
 
 void	get_permission(struct stat fileStat, ll_list *current)
