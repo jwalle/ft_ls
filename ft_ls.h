@@ -59,7 +59,7 @@ int					error(char c);
 ll_list				*ll_stock(char *str);
 ll_list    			*ll_copy_new(char *str, struct dirent *dp, ll_list *head, char *str2);
 ll_list				*ll_copy_current(char *str, struct dirent *dp, ll_list *current, char *str2);
-void				ft_putstr_bold(char *str);
+void				ft_putstr_b(char *str);
 void				ft_ls(char *str, t_static2 *opt);
 void				options(char *av, t_static2 *opt);
 void				options2(char *av, t_static2 *opt);

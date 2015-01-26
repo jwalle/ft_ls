@@ -52,19 +52,18 @@ int		can_open(struct dirent *dp, char *str)
 	if (S_ISDIR(fileStat.st_mode) == 1)
 		return (1);
 	return (0);
-	
-	// dans stat mettre le chemin + le nom du dossier teste.
 }
 
 char	*correct_path(char *s1, char *s2)
 {
 	int		i;
+	int		j;
 	char	*str;
 	
 	i = ft_strlen(s1);
-	str = NULL;
+	j = ft_strlen(s2);
+	str = ft_strnew(i + j + 1);
 	ft_strcpy(str, s1);
-	printf("plop1\n");
 	if (s1[i] != '/')
 		ft_strcat(str, "/");
 	ft_strcat(str, s2);

@@ -12,6 +12,32 @@
 
 #include "ft_ls.h"
 
+void swap(struct ll_list *a, ll_list *b)
+{
+	char *temp;
+	
+	temp = a->;
+	a->filename
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void		sort_str(char **str, int array_size_str)
 {
 	char	i;

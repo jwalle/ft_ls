@@ -14,27 +14,17 @@
 
 void	ft_ls(char *str, t_static2 *opt)
 {
-	ll_list   		*current;
+	ll_list   		*cur;
 
-	current = ll_stock(str);
-	while (current != NULL)
+	cur = ll_stock(str);
+	while (cur != NULL)
 	{
-		if (current->filename[0] == '.')
-		{
-			if ((current->isdir) && opt->a)
-				ft_putstr_bold(current->filename);
-			if (!(current->isdir) && opt->a)
-				ft_putstr(current->filename);
-		}
+		if (cur->filename[0] == '.')
+			((cur->isdir) && opt->a) ? ft_putstr_b(cur->filename) : ft_putstr(cur->filename);
 		else
-		{
-			if ((current->isdir))
-				ft_putstr_bold(current->filename);
-			else
-				ft_putstr(current->filename);
-		}
+			(cur->isdir) ? ft_putstr_b(cur->filename) : ft_putstr(cur->filename);
 		ft_putstr(" ");
-		current = current->next;
+		cur = cur->next;
 	}
 	ft_putchar('\n');
 }
@@ -59,9 +49,11 @@ int		main(int ac, char **av)
 				i++;
 			}
 			//printf("av = %s\n",av[i]);
-			ft_ls(av[i], &opt); // les options peuvent aller etre rentre apres le(s) dossier(s)...
+			ft_ls(av[i], &opt); // les options peuvent etre rentre apres le(s) dossier(s)...
 			i++;
 		}
 	}
 	return (0);
 }
+
+// 
