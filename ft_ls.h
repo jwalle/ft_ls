@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:36:17 by jwalle            #+#    #+#             */
-/*   Updated: 2014/12/13 19:23:53 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/01/26 16:16:28 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include <unistd.h>
 #include <dirent.h>
 #include <stdlib.h>
+#include <uuid/uuid.h>
+#include <pwd.h>
+#include <grp.h>
 #include <stdio.h>		//PRINTF A RETIRER
 #include "libft.h"
 
@@ -28,6 +31,11 @@ typedef struct		element
 {
 	char			*filename;
 	int				isdir;
+	char			*perm;
+	int				link;
+	char			*uid;
+	char			*gid;
+	int				size;
 	struct element	*next;
 	
 }					ll_list;
@@ -78,5 +86,7 @@ int					clean(void);
 void				merge_sort(ll_list **headref);
 ll_list				*merge(ll_list *a, ll_list *b);
 void				split(ll_list *source, ll_list **front, ll_list **back);
+void				get_info(struct dirent *dp, ll_list *current, char *str);
+void				get_permission(struct stat fileStat, ll_list *current);
 
 #endif

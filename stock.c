@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:46:15 by jwalle            #+#    #+#             */
-/*   Updated: 2014/12/13 19:24:13 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/01/26 16:17:24 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,47 @@ ll_list    *ll_copy_current(char *str, struct dirent *dp, ll_list *current, char
     current->next = new;
     new->next = NULL;
     new->filename = str;
-    new->isdir = can_open(dp, str2);
+	get_info(dp, new, str2);
+    //new->isdir = can_open(dp, str2);
     return (new);
+}
+
+void	get_info(struct dirent *dp, ll_list *current, char *str)
+{
+	struct stat		fileStat;
+	struct passwd	*pwd;
+	struct group	*grp;
+	char			*path;
+
+	path = correct_path(str, dp->d_name);
+	stat(path, &fileStat);
+	get_permission(fileStat, current);
+	current->isdir = S_ISDIR(fileStat.st_mode);
+	current->link = fileStat.st_nlink;
+	pwd = getpwuid(fileStat.st_uid);
+	current->uid = pwd->pw_name;
+	grp = getgrgid(fileStat.st_gid);
+	current->gid = grp->gr_name;
+	current->size = fileStat.st_size;
+
+	printf("%s, %d\n", current->uid, current->size);
+	printf("%d\n", current->link);
+}
+
+void	get_permission(struct stat fileStat, ll_list *current)
+{
+	char *str;
+
+	str = ft_strnew(10);	
+	str[0] = S_ISDIR(fileStat.st_mode) ? 'd' : '-';
+	str[1] = (fileStat.st_mode & S_IRUSR) ? 'r' : '-';
+	str[2] = (fileStat.st_mode & S_IWUSR) ? 'w' : '-';
+	str[3] = (fileStat.st_mode & S_IXUSR) ? 'x' : '-';
+	str[4] = (fileStat.st_mode & S_IRGRP) ? 'r' : '-';
+	str[5] = (fileStat.st_mode & S_IWGRP) ? 'w' : '-';
+	str[6] = (fileStat.st_mode & S_IXGRP) ? 'x' : '-';
+	str[7] = (fileStat.st_mode & S_IROTH) ? 'r' : '-';
+	str[8] = (fileStat.st_mode & S_IWOTH) ? 'w' : '-';
+	str[9] = (fileStat.st_mode & S_IXOTH) ? 'x' : '-';
+	current->perm = str;
 }
