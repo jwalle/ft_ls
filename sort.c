@@ -12,33 +12,77 @@
 
 #include "ft_ls.h"
 
-void swap(struct ll_list *a, ll_list *b)
+void	merge_sort(ll_list **headref)
 {
-	char *temp;
+	ll_list *head;
+	ll_list *a;
+	ll_list *b;
 	
-	temp = a->;
-	a->filename
+	head  = *headref;
+	if (!head || !head->next)
+		return;
+	split(head, &a, &b);
+	merge_sort(&a);
+	merge_sort(&b);
+	
+	*headref = merge(a, b);
+}
+
+ll_list	*merge(ll_list *a, ll_list *b)
+{
+	ll_list *result;
+	
+	if (!a)
+		return(b);
+	if (!b)
+		return(a);
+		
+	if (ft_strcmp(a->filename, b->filename) < 0)
+	{
+		result = a;
+		result->next = merge(a->next, b);
+	}
+	else
+	{
+		result = b;
+		result->next = merge(a, b->next);
+	}
+	return (result);
+}
+
+void	split(ll_list *source, ll_list **front, ll_list **back)
+{
+	ll_list	*fast;
+	ll_list *slow;
+	
+	if (!source || !source->next)
+	{
+		*front = source;
+		*back = NULL;
+	}
+	else
+	{
+		slow = source;
+		fast = source->next;
+		while (fast)
+		{
+			fast = fast->next;
+			if (fast)
+			{
+				slow = slow->next;
+				fast = fast->next;
+			}
+		}
+		*front = source;
+		*back = slow->next;
+		slow->next = NULL;
+	}
+	
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void		sort_str(char **str, int array_size_str)
+void	sort_str(char **str, int array_size_str)
 {
 	char	i;
 	int		j;

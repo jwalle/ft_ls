@@ -75,5 +75,8 @@ int					sort_version(void);
 int					sort_reverse(void);
 int					output(void);
 int					clean(void);
+void				merge_sort(ll_list **headref);
+ll_list				*merge(ll_list *a, ll_list *b);
+void				split(ll_list *source, ll_list **front, ll_list **back);
 
 #endif

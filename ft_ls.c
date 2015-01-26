@@ -17,6 +17,7 @@ void	ft_ls(char *str, t_static2 *opt)
 	ll_list   		*cur;
 
 	cur = ll_stock(str);
+	merge_sort(&cur);
 	while (cur != NULL)
 	{
 		if (cur->filename[0] == '.')
