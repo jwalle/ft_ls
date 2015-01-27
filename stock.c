@@ -50,7 +50,7 @@ ll_list    *ll_copy_new(char *str, struct dirent *dp, ll_list *head, char *str2)
     new->next = head;
     head = new;
     new->filename = str;
-    new->isdir = can_open(dp, str2);
+    get_info(dp, new, str2);
     return (new);
 }
 
@@ -63,7 +63,6 @@ ll_list    *ll_copy_current(char *str, struct dirent *dp, ll_list *current, char
     new->next = NULL;
     new->filename = str;
 	get_info(dp, new, str2);
-    //new->isdir = can_open(dp, str2);
     return (new);
 }
 
@@ -81,13 +80,15 @@ void	get_info(struct dirent *dp, ll_list *current, char *str)
 	current->link = fileStat.st_nlink;
 	pwd = getpwuid(fileStat.st_uid);
 	current->uid = pwd->pw_name;
+	current->uid_nb = fileStat.st_uid;
 	grp = getgrgid(fileStat.st_gid);
 	current->gid = grp->gr_name;
+	current->gid_nb = fileStat.st_gid;
 	current->size = fileStat.st_size;
 	current->time = fileStat.st_mtime;
 
 	//printf("%s, %d, %s\n", current->uid, current->size, ctime(&current->time));
-	//printf("%d\n", current->link);
+	//printf("%d\n", current->gid_nb); // verifier que les id sont bons.
 }
 
 void	get_permission(struct stat fileStat, ll_list *current)

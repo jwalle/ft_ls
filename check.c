@@ -36,11 +36,11 @@ void		options(char *av, t_static2 *opt)
 	
 	//printf("option\n");
 	i = 1;
-	if ((av[0] != '-') || (av[0] == '-' && !av[1]))
+	/*if ((av[0] != '-') || (av[0] == '-' && !av[1]))
 	{
-		ft_ls(av, opt);
+		ft_ls(opt);
 		return ;
-	}
+	}*/
 	while (av[i])
 	{
 		if (av[i] == 'l')
@@ -91,8 +91,11 @@ void		options2(char *av, t_static2 *opt)
 int		choose_prog(t_static2 *opt, char *av)
 {
 	ll_list		*cur;
+	
 	cur = ll_stock(".");
 	merge_sort(&cur);
+	if (opt->dft)
+		ft_ls(opt, cur);
 	if (opt->l)
 	{
 		print_l(cur, opt);

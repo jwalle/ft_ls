@@ -82,6 +82,8 @@ void	split(ll_list *source, ll_list **front, ll_list **back)
 
 
 
+
+
 void	sort_str(char **str, int array_size_str)
 {
 	char	i;

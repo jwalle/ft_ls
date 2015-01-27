@@ -17,7 +17,7 @@
 #include <unistd.h>
 #include <dirent.h>
 #include <stdlib.h>
-#include <uuid/uuid.h>
+//#include <uuid/uuid.h>
 #include <pwd.h>
 #include <grp.h>
 #include <time.h>
@@ -45,7 +45,9 @@ typedef struct		element
 	char			*perm;
 	int				link;
 	char			*uid;
+	int				uid_nb;
 	char			*gid;
+	int				gid_nb;
 	int				size;
 	time_t			time;
 	struct element	*next;
@@ -67,6 +69,7 @@ typedef struct		s_static2
 	int				n;
 	int				S;
 	int				v;
+	int				dft;
 }					t_static2;
 
 int					main(int ac, char **av);
@@ -80,7 +83,7 @@ ll_list				*ll_stock(char *str);
 ll_list    			*ll_copy_new(char *str, struct dirent *dp, ll_list *head, char *str2);
 ll_list				*ll_copy_current(char *str, struct dirent *dp, ll_list *current, char *str2);
 void				ft_putstr_b(char *str);
-void				ft_ls(char *str, t_static2 *opt);
+void				ft_ls(t_static2 *opt, ll_list *cur);
 void				options(char *av, t_static2 *opt);
 void				options2(char *av, t_static2 *opt);
 int					choose_prog(t_static2 *opt, char *av);
@@ -101,6 +104,9 @@ void				split(ll_list *source, ll_list **front, ll_list **back);
 void				get_info(struct dirent *dp, ll_list *current, char *str);
 void				get_permission(struct stat fileStat, ll_list *current);
 void				print_l(ll_list *curent, t_static2 *opt);
-void				get_len(max_len *len, ll_list *current);
+max_len				*get_len(ll_list *current);
+int					nblen(int len);
+void				ft_putnstr(int max, char *str);
+void				ft_putnnbr(int max, int info);
 
 #endif
