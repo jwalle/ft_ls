@@ -49,7 +49,7 @@ typedef struct		element
 	char			*gid;
 	int				gid_nb;
 	int				size;
-	time_t			time;
+	time_t			*time;
 	struct element	*next;
 	
 }					ll_list;
@@ -108,5 +108,6 @@ max_len				*get_len(ll_list *current);
 int					nblen(int len);
 void				ft_putnstr(int max, char *str);
 void				ft_putnnbr(int max, int info);
+void				ft_print_time(time_t *timefile);
 
 #endif

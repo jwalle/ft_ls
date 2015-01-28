@@ -16,28 +16,26 @@ void	print_l(ll_list *current, t_static2 *opt)
 {
 	max_len *len;
 	
-	printf("max_len = %d", (int)sizeof(len));
-	if (opt->a)
-		printf("plop");
 	len = get_len(current);
 	while (current)
 	{
-		ft_putstr(current->perm);
-		ft_putchar(' ');
-		ft_putnnbr(len->link_len, current->link);
-		ft_putchar(' ');
-		ft_putnstr(len->uid_len, current->uid);
-		ft_putchar(' ');
-		ft_putnstr(len->gid_len, current->gid);	
-		ft_putchar(' ');
-		ft_putnnbr(len->size_len, current->size);
-		ft_putchar(' ');
-		//ft_putnstr(len->name_len, current->filename);
-		ft_putstr(current->filename);
-		ft_putchar('\n');
-
-	//ft_nblen(len);
-	//ft_putchar
+		if (current->filename[0] != '.' || opt->a)
+		{
+			ft_putstr(current->perm);
+			ft_putchar(' ');
+			ft_putnnbr(len->link_len, current->link);
+			ft_putchar(' ');
+			ft_putnstr(len->uid_len, current->uid);
+			ft_putchar(' ');
+			ft_putnstr(len->gid_len, current->gid);	
+			ft_putchar(' ');
+			ft_putnnbr(len->size_len, current->size);
+			ft_putchar(' ');
+			//ft_print_time((current->time));
+			//ft_putchar(' ');
+			ft_putstr(current->filename);
+			ft_putchar('\n');
+		}
 	current = current->next;
 	}
 }
@@ -79,42 +77,23 @@ max_len		*get_len(ll_list *current)
 	return(size);
 }
 
-int		nblen(int len)
+void	ft_print_time(time_t *timefile)
 {
+	time_t 	current;
+	char	*str;
 	int		i;
 	
-	i = (len <= 0 ? 1 : 0);
-	while (len)
+	str = ctime(timefile);
+	current = time(NULL);
+	if (current - *timefile < 0 || current - *timefile >= 15552000)
 	{
-		len = len/10;
-		++i;
+		i = ft_strlen(str) - 1;
+		str[i] = 0;
+		while(str[i] != ' ')
+			--i;
+		write(1, str + 4, 7);
+		ft_putstr(str + i);
 	}
-	//printf("i get len = %d\n", i);
-	return(i);
-}
-
-void	ft_putnstr(int max, char *str)
-{
-	int i;
-	
-	i = 0;
-	while ((int)(ft_strlen(str) + i) < max)
-	{
-		ft_putchar(' ');
-		i++;
-	}
-	ft_putstr(str);
-}
-
-void	ft_putnnbr(int max, int info)
-{
-	int	i;
-	
-	i = 0;
-	while ((nblen(info) + i) < max)
-	{
-		ft_putchar(' ');
-		i++;
-	}
-	ft_putnbr(info);	
+	else
+		write(1, str + 4, ft_strlen(str) - 13);
 }

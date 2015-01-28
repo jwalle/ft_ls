@@ -85,7 +85,7 @@ void	get_info(struct dirent *dp, ll_list *current, char *str)
 	current->gid = grp->gr_name;
 	current->gid_nb = fileStat.st_gid;
 	current->size = fileStat.st_size;
-	current->time = fileStat.st_mtime;
+	current->time = &(fileStat.st_mtime);
 
 	//printf("%s, %d, %s\n", current->uid, current->size, ctime(&current->time));
 	//printf("%d\n", current->gid_nb); // verifier que les id sont bons.
