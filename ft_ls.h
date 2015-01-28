@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:36:17 by jwalle            #+#    #+#             */
-/*   Updated: 2015/01/26 17:20:07 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/01/28 15:12:01 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ typedef struct		element
 	char			*gid;
 	int				gid_nb;
 	int				size;
-	time_t			*time;
+	const time_t	*time;
+	char			*date;
 	struct element	*next;
 	
 }					ll_list;
@@ -72,6 +73,12 @@ typedef struct		s_static2
 	int				dft;
 }					t_static2;
 
+typedef	struct		directory
+{
+	char			*str;
+	struct element2 *next;
+}					d_list;
+
 int					main(int ac, char **av);
 void				fail_open_directory(char *str);
 struct dirent 		*get_content(DIR *dir);
@@ -79,7 +86,7 @@ void				close_directory(DIR *dir);
 int					can_open(struct dirent *dp, char *str);
 char				*correct_path(char *s1, char *s2);
 int					error(char c);
-ll_list				*ll_stock(char *str);
+ll_list				*ll_stock(char *str, t_static2 *opt);
 ll_list    			*ll_copy_new(char *str, struct dirent *dp, ll_list *head, char *str2);
 ll_list				*ll_copy_current(char *str, struct dirent *dp, ll_list *current, char *str2);
 void				ft_putstr_b(char *str);
@@ -108,6 +115,6 @@ max_len				*get_len(ll_list *current);
 int					nblen(int len);
 void				ft_putnstr(int max, char *str);
 void				ft_putnnbr(int max, int info);
-void				ft_print_time(time_t *timefile);
+void				ft_print_time(const time_t timefile, char *str);
 
 #endif

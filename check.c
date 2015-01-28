@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:31:11 by jwalle            #+#    #+#             */
-/*   Updated: 2015/01/26 17:43:03 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/01/28 15:05:49 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int		choose_prog(t_static2 *opt, char *av)
 {
 	ll_list		*cur;
 	
-	cur = ll_stock(".");
+	cur = ll_stock(".", opt);
 	merge_sort(&cur);
 	if (opt->dft)
 		ft_ls(opt, cur);

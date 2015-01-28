@@ -6,13 +6,13 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:46:15 by jwalle            #+#    #+#             */
-/*   Updated: 2015/01/26 17:45:07 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/01/28 15:19:10 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-ll_list     *ll_stock(char *str)
+ll_list     *ll_stock(char *str, t_static2 *opt)
 {
     ll_list         *head;
     ll_list         *current;
@@ -37,8 +37,10 @@ ll_list     *ll_stock(char *str)
                 current = current->next;
             current = ll_copy_current(dp->d_name, dp, current, str);
         }
+		/*if (current->isdir && ft_strcmp(current->filename, ".") && opt->R)
+			ll_stock(current->filename, opt);*/
     }
-    close_directory(dir);
+	    close_directory(dir);
     return (head);
 }
 
@@ -86,9 +88,10 @@ void	get_info(struct dirent *dp, ll_list *current, char *str)
 	current->gid_nb = fileStat.st_gid;
 	current->size = fileStat.st_size;
 	current->time = &(fileStat.st_mtime);
+	current->date = ctime(&(fileStat.st_mtime));
 
 	//printf("%s, %d, %s\n", current->uid, current->size, ctime(&current->time));
-	//printf("%d\n", current->gid_nb); // verifier que les id sont bons.
+	//printf("date1 : %s\n", current->date); // verifier que les id sont bons.
 }
 
 void	get_permission(struct stat fileStat, ll_list *current)
