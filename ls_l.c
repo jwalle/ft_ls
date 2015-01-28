@@ -22,17 +22,13 @@ void	print_l(ll_list *current, t_static2 *opt)
 		if (current->filename[0] != '.' || opt->a)
 		{
 			ft_putstr(current->perm);
-			ft_putchar(' ');
 			ft_putnnbr(len->link_len, current->link);
-			ft_putchar(' ');
-			ft_putnstr(len->uid_len, current->uid);
-			ft_putchar(' ');
-			ft_putnstr(len->gid_len, current->gid);	
-			ft_putchar(' ');
+			if (!opt->g)
+				ft_putnstr(len->uid_len, current->uid);
+			if (!opt->G)
+				ft_putnstr(len->gid_len, current->gid);	
 			ft_putnnbr(len->size_len, current->size);
-			ft_putchar(' ');
 			//ft_print_time((current->time));
-			//ft_putchar(' ');
 			ft_putstr(current->filename);
 			ft_putchar('\n');
 		}
@@ -96,4 +92,5 @@ void	ft_print_time(time_t *timefile)
 	}
 	else
 		write(1, str + 4, ft_strlen(str) - 13);
+	ft_putchar(' ');
 }

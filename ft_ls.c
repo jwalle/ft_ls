@@ -20,11 +20,14 @@ void	ft_ls(t_static2 *opt, ll_list *cur)
 	//merge_sort(&cur);
 	while (cur != NULL)
 	{
-		if (cur->filename[0] == '.')
-			((cur->isdir) && opt->a) ? ft_putstr_b(cur->filename) : ft_putstr(cur->filename);
-		else
-			(cur->isdir) ? ft_putstr_b(cur->filename) : ft_putstr(cur->filename);
-		ft_putstr(" ");
+		if (cur->filename[0] != '.' || opt->a)
+		{
+			if (cur->filename[0] == '.')
+				((cur->isdir) && opt->a) ? ft_putstr_b(cur->filename) : ft_putstr(cur->filename);
+			else
+				(cur->isdir) ? ft_putstr_b(cur->filename) : ft_putstr(cur->filename);
+			ft_putstr(" ");
+		}
 		cur = cur->next;
 	}
 	ft_putchar('\n');
