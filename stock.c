@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:46:15 by jwalle            #+#    #+#             */
-/*   Updated: 2015/01/28 15:19:10 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/01/29 14:32:57 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ ll_list     *ll_stock(char *str, t_static2 *opt)
                 current = current->next;
             current = ll_copy_current(dp->d_name, dp, current, str);
         }
-		/*if (current->isdir && ft_strcmp(current->filename, ".") && opt->R)
-			ll_stock(current->filename, opt);*/
+		if (current->isdir && ft_strcmp(current->filename, ".") && opt->R)
+			ll_stock(current->filename, opt);
     }
 	    close_directory(dir);
     return (head);
@@ -51,7 +51,7 @@ ll_list    *ll_copy_new(char *str, struct dirent *dp, ll_list *head, char *str2)
     new = (ll_list*)malloc(sizeof(ll_list));
     new->next = head;
     head = new;
-    new->filename = str;
+    new->filename = (str);
     get_info(dp, new, str2);
     return (new);
 }
@@ -63,7 +63,7 @@ ll_list    *ll_copy_current(char *str, struct dirent *dp, ll_list *current, char
     new = (ll_list*)malloc(sizeof(ll_list));
     current->next = new;
     new->next = NULL;
-    new->filename = str;
+    new->filename = (str);
 	get_info(dp, new, str2);
     return (new);
 }

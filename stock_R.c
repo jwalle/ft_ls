@@ -6,14 +6,17 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/28 14:50:53 by jwalle            #+#    #+#             */
-/*   Updated: 2015/01/28 16:26:03 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/01/29 14:29:21 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_ls.h"
+
+/*
 char		**stock_R(char *str, t_static2 *opt)
 {
-/*	d_list			*head;
-	d_list			*current;i*/
+	d_list			*head;
+	d_list			*current;
 	DIR				*dirlist;
 	struct dirent 	*dp;
 	struct stat		*stat;
@@ -39,4 +42,4 @@ char		**stock_R(char *str, t_static2 *opt)
 str		*stock(d_list *head)
 {
 	while (d)
-}
+}*/

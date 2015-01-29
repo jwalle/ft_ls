@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:31:11 by jwalle            #+#    #+#             */
-/*   Updated: 2015/01/28 15:05:49 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/01/29 15:34:36 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,9 @@ void		options2(char *av, t_static2 *opt)
 		if (av[i] == 'v')
 			opt->v = 1;
 		if (error(av[i]))
-			return ;
+			return;
 		i++;
 	}
-	choose_prog(opt, av);
 }
 
 int		choose_prog(t_static2 *opt, char *av)
