@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 08:48:45 by jwalle            #+#    #+#             */
-/*   Updated: 2015/01/29 16:12:25 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/01/29 16:47:27 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 void	ft_ls(t_static2 *opt, ll_list *cur)
 {
-	//ll_list   		*cur;
-
-	//cur = ll_stock(str);
-	//merge_sort(&cur);
 	while (cur != NULL)
 	{
 		if (cur->filename[0] != '.' || opt->a)
@@ -26,7 +22,7 @@ void	ft_ls(t_static2 *opt, ll_list *cur)
 				((cur->isdir) && opt->a) ? ft_putstr_b(cur->filename) : ft_putstr(cur->filename);
 			else
 				(cur->isdir) ? ft_putstr_b(cur->filename) : ft_putstr(cur->filename);
-			ft_putstr(" ");
+			ft_putstr("\t");
 		}
 		cur = cur->next;
 	}
@@ -35,12 +31,12 @@ void	ft_ls(t_static2 *opt, ll_list *cur)
 
 void	ft_parse(char **av, t_static2 *opt, int ac)
 {
-	char **str;
+	char 	**str;
 	int		i;
 	int 	j;
 
 	i = -1;
-	j = -1;
+	j = 0;
 	str = malloc(sizeof(*str) * ac);
 	opt->dft = 1;
 	while (ac > ++j)
@@ -56,8 +52,15 @@ void	ft_parse(char **av, t_static2 *opt, int ac)
 			ft_strcpy(str[i], av[j]);
 		}
 	}
-	while (i--)
-		choose_prog(opt, *str);
+	j = 0;
+	while (str[j])
+	{
+		ft_putstr(str[j]);
+		ft_putstr(":\n");
+		choose_prog(opt, str[j]);
+		ft_putchar('\n');
+		j++;
+	}
 }
 
 int		main(int ac, char **av)
@@ -76,10 +79,7 @@ int		main(int ac, char **av)
 	}
 	if (ac > 2)
 	{
-		//printf("plop");
 		ft_parse(av, &opt, ac);
 	}
 	return (0);
 }
-
-// 
