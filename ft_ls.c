@@ -56,7 +56,7 @@ void	ft_parse(char **av, t_static2 *opt, int ac)
 	while (str[j])
 	{
 		ft_putstr(str[j]);
-		ft_putstr(":\n");
+		ft_putstr(": \n");
 		choose_prog(opt, str[j]);
 		ft_putchar('\n');
 		j++;
