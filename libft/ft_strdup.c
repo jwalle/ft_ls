@@ -31,6 +31,5 @@ char	*ft_strdup(const char *s1)
 		i++;
 	}
 	dest[i] = '\0';
-	free((void*)s1);
 	return (dest);
 }

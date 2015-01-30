@@ -35,7 +35,7 @@ ll_list     *ll_stock(char *str, t_static2 *opt)
         {
             while (current->next != NULL)
                 current = current->next;
-            current = ll_copy_current(dp->d_name, dp, current, str);
+            current = ll_copy_cur(dp->d_name, dp, current, str);
         }
 		if (current->isdir && ft_strcmp(current->filename, ".") && opt->R)
 			ll_stock(current->filename, opt);
@@ -51,19 +51,19 @@ ll_list    *ll_copy_new(char *str, struct dirent *dp, ll_list *head, char *str2)
     new = (ll_list*)malloc(sizeof(ll_list));
     new->next = head;
     head = new;
-    new->filename = (str);
+    new->filename = ft_strdup(str);
     get_info(dp, new, str2);
     return (new);
 }
 
-ll_list    *ll_copy_current(char *str, struct dirent *dp, ll_list *current, char *str2)
+ll_list    *ll_copy_cur(char *str, struct dirent *dp, ll_list *cur, char *str2)
 {
     ll_list *new;
 
     new = (ll_list*)malloc(sizeof(ll_list));
-    current->next = new;
+    cur->next = new;
     new->next = NULL;
-    new->filename = (str);
+    new->filename = ft_strdup(str);
 	get_info(dp, new, str2);
     return (new);
 }
@@ -81,20 +81,14 @@ void	get_info(struct dirent *dp, ll_list *current, char *str)
 	current->isdir = S_ISDIR(fileStat.st_mode);
 	current->link = fileStat.st_nlink;
 	pwd = getpwuid(fileStat.st_uid);
-	current->uid = pwd->pw_name;
+	current->uid = ft_strdup(pwd->pw_name);
 	current->uid_nb = fileStat.st_uid;
 	grp = getgrgid(fileStat.st_gid);
-	current->gid = grp->gr_name;
+	current->gid = ft_strdup(grp->gr_name);
 	current->gid_nb = fileStat.st_gid;
 	current->size = fileStat.st_size;
 	current->bsize = fileStat.st_blocks / 2;
-	//current->time = (time_t*)malloc(sizeof(time_t));
-	//ft_strcpy((char*)current->time, (const char*)(fileStat.st_mtime));
-	current->time = &fileStat.st_mtime;
-	//ft_memcpy((void*)current->time, (const void*)fileStat.st_mtime, 100);
-	//current->date = ft_strnew(100);
-	//ft_strcpy(current->date, ctime(&(fileStat.st_mtime)));
-	//current->date = ctime(&(fileStat.st_mtime));
+	current->time = fileStat.st_mtime;
 
 	//printf("%s, %d, %s\n", current->uid, current->size, ctime(&current->time));
 	//printf("time 1 : %s\n", ctime(current->time)); // verifier que les id sont bons.
@@ -115,5 +109,5 @@ void	get_permission(struct stat fileStat, ll_list *current)
 	str[7] = (fileStat.st_mode & S_IROTH) ? 'r' : '-';
 	str[8] = (fileStat.st_mode & S_IWOTH) ? 'w' : '-';
 	str[9] = (fileStat.st_mode & S_IXOTH) ? 'x' : '-';
-	current->perm = str;
+	current->perm = ft_strdup(str);
 }

@@ -50,8 +50,7 @@ typedef struct		element
 	int				gid_nb;
 	int				size;
 	int				bsize;
-	const time_t	*time;
-	char			*date;
+	time_t			time;
 	struct element	*next;
 	
 }					ll_list;
@@ -91,7 +90,7 @@ char				*correct_path(char *s1, char *s2);
 int					error(char c);
 ll_list				*ll_stock(char *str, t_static2 *opt);
 ll_list    			*ll_copy_new(char *str, struct dirent *dp, ll_list *head, char *str2);
-ll_list				*ll_copy_current(char *str, struct dirent *dp, ll_list *current, char *str2);
+ll_list				*ll_copy_cur(char *str, struct dirent *dp, ll_list *cur, char *str2);
 void				ft_putstr_b(char *str);
 void				ft_ls(t_static2 *opt, ll_list *cur);
 void				options(char *av, t_static2 *opt);
@@ -104,11 +103,13 @@ void				sort_num(int a[], int array_size, int rev);
 void				sort_str(char **str, int array_size_str);
 int					output(void);
 int					clean(void);
-void				merge_sort(ll_list **headref, t_static2 *opt);
+void				merge_sort(ll_list **ref, t_static2 *opt);
 ll_list				*merge(ll_list *a, ll_list *b);
 ll_list				*merge_r(ll_list *a, ll_list *b);
 ll_list				*merge_size(ll_list *a, ll_list *b);
 ll_list				*merge_size_r(ll_list *a, ll_list *b);
+ll_list				*merge_time(ll_list *a, ll_list *b);
+ll_list				*merge_time_r(ll_list *a, ll_list *b);
 void				split(ll_list *source, ll_list **front, ll_list **back);
 void				get_info(struct dirent *dp, ll_list *current, char *str);
 void				get_permission(struct stat fileStat, ll_list *current);
@@ -117,7 +118,7 @@ max_len				*get_len(ll_list *current);
 int					nblen(int len);
 void				ft_putnstr(int max, char *str);
 void				ft_putnnbr(int max, int info);
-void				ft_print_time(const time_t *timefile);
+void				ft_print_time(time_t timefile);
 void				print_total(ll_list *current, t_static2 *opt);
 
 

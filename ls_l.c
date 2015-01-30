@@ -22,7 +22,6 @@ void	print_l(ll_list *current, t_static2 *opt)
 	{
 		if (current->filename[0] != '.' || opt->a)
 		{
-			//printf("time : %s\n", ctime(current->time));
 			if (opt->s)
 			ft_putnnbr(len->bsize_len, current->bsize);
 			ft_putstr(current->perm);
@@ -33,7 +32,7 @@ void	print_l(ll_list *current, t_static2 *opt)
 			if (!opt->G)
 				ft_putnstr(len->gid_len, current->gid);	
 			ft_putnnbr(len->size_len, current->size);
-			ft_print_time(current->time); // stocker le str aussi !
+			ft_print_time(current->time);
 			(!current->isdir) ? ft_putstr(current->filename) 
 								: ft_putstr_b(current->filename);
 			ft_putchar('\n');
@@ -64,7 +63,7 @@ max_len		*get_len(ll_list *current)
 {
 	int		i;
 	max_len *size;
-	
+
 	i = 0;
 	size = malloc(sizeof(max_len));
 	size->size_len = 0;
@@ -76,7 +75,6 @@ max_len		*get_len(ll_list *current)
 	size->bsize_len = 0;
 	while(current)
 	{
-	//printf("link = %d, size = %d, name = %s\n", current->link, size->size_len, current->filename);
 		i = nblen(current->link);
 		if(i > size->link_len)
 			size->link_len = i;
@@ -92,31 +90,23 @@ max_len		*get_len(ll_list *current)
 		i = ft_strlen(current->filename);
 		if (i > size->name_len)
 			size->name_len = i;
-		//i = ft_strlen(current->time);
-		//if (i > size->day_len)
-		//	size->day_len = i;
 		i = nblen(current->bsize);
 		if (i > size->bsize_len)
 			size->bsize_len = i;
-
 		current = current->next;
 	}
-
-	//printf("link,gid,uid,size,filename : %d, %d, %d, %d, %d\n", size->link_len, size->gid_len, size->uid_len, size->size_len, size->name_len);
 	return(size);
 }
 
-void	ft_print_time(const time_t *timefile)
+void	ft_print_time(time_t timefile)
 {
 	char	*str;
 	int		i;
 	time_t current;
 
-	//str = ft_strnew(100);
-	//ft_strcpy(str, (const char*)ctime(timefile));
-	str = ctime(timefile);
+	str = ctime(&timefile);
 	current = time(NULL);
-	if (current - *timefile < 0 || current - *timefile >= 15552000)
+	if (current - timefile < 0 || current - timefile >= 15552000)
 	{
 		i = ft_strlen(str) - 1;
 		str[i] = 0;
