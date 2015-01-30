@@ -87,11 +87,17 @@ void	get_info(struct dirent *dp, ll_list *current, char *str)
 	current->gid = grp->gr_name;
 	current->gid_nb = fileStat.st_gid;
 	current->size = fileStat.st_size;
-	current->time = &(fileStat.st_mtime);
-	current->date = ctime(&(fileStat.st_mtime));
+	current->bsize = fileStat.st_blocks / 2;
+	//current->time = (time_t*)malloc(sizeof(time_t));
+	//ft_strcpy((char*)current->time, (const char*)(fileStat.st_mtime));
+	current->time = &fileStat.st_mtime;
+	//ft_memcpy((void*)current->time, (const void*)fileStat.st_mtime, 100);
+	//current->date = ft_strnew(100);
+	//ft_strcpy(current->date, ctime(&(fileStat.st_mtime)));
+	//current->date = ctime(&(fileStat.st_mtime));
 
 	//printf("%s, %d, %s\n", current->uid, current->size, ctime(&current->time));
-	//printf("date1 : %s\n", current->date); // verifier que les id sont bons.
+	//printf("time 1 : %s\n", ctime(current->time)); // verifier que les id sont bons.
 }
 
 void	get_permission(struct stat fileStat, ll_list *current)

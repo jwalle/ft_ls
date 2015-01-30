@@ -17,7 +17,7 @@ int		error(char c)
 	//printf("c = %c\n", c);
 	if (c != 'l' && c != 'R' && c != 'a' && c != 'r' && c != 't'
 	&& c != 'A' && c != 'd' && c != 'g' && c != 'G' && c != 'i'
-	&& c != 'n' && c != 'S' && c != 'v')
+	&& c != 'n' && c != 'S' && c != 'v' && c != 's')
 	{
 		ft_putstr("ft_ls: invalid option -- '");
 		ft_putchar(c);
@@ -34,13 +34,8 @@ void		options(char *av, t_static2 *opt)
 {
 	int i;
 	
-	//printf("option\n");
 	i = 1;
-	/*if ((av[0] != '-') || (av[0] == '-' && !av[1]))
-	{
-		ft_ls(opt);
-		return ;
-	}*/
+	opt->no_r = 1;
 	while (av[i])
 	{
 		if (av[i] == 'l')
@@ -50,9 +45,14 @@ void		options(char *av, t_static2 *opt)
 		if (av[i] == 'a')
 			opt->a = 1;
 		if (av[i] == 'r')
+		{
 			opt->r = 1;
+			opt->no_r = 0;
+		}
 		if (av[i] == 't')
 			opt->t = 1;
+		if (av[i] == 's')
+			opt->s = 1;
 		if (av[i] == 'A')
 			opt->A = 1;
 		i++;
@@ -92,7 +92,7 @@ int		choose_prog(t_static2 *opt, char *av)
 	ll_list		*cur;
 	
 	cur = ll_stock(av, opt);
-	merge_sort(&cur);
+	merge_sort(&cur, opt);
 	if (opt->dft)
 		ft_ls(opt, cur);
 	if (opt->l)
@@ -102,7 +102,7 @@ int		choose_prog(t_static2 *opt, char *av)
 	}
 	if (opt->R)
 		printf("Option r.%s\n", av);
-	printf("placeholder choose program to run\n");
+	//printf("placeholder choose program to run\n");
 	free(cur);
 	return (1);
 }

@@ -17,7 +17,6 @@
 #include <unistd.h>
 #include <dirent.h>
 #include <stdlib.h>
-//#include <uuid/uuid.h>
 #include <pwd.h>
 #include <grp.h>
 #include <time.h>
@@ -35,6 +34,7 @@ typedef	struct		s_static
 	int				uid_len;
 	int				gid_len;
 	int				size_len;
+	int				bsize_len;
 	int				day_len;
 }					max_len;
 
@@ -49,6 +49,7 @@ typedef struct		element
 	char			*gid;
 	int				gid_nb;
 	int				size;
+	int				bsize;
 	const time_t	*time;
 	char			*date;
 	struct element	*next;
@@ -61,6 +62,7 @@ typedef struct		s_static2
 	int				R;
 	int				a;
 	int				r;
+	int				no_r;
 	int				t;
 	int				A;
 	int				d;
@@ -69,6 +71,7 @@ typedef struct		s_static2
 	int				i;
 	int				n;
 	int				S;
+	int				s;
 	int				v;
 	int				dft;
 }					t_static2;
@@ -99,14 +102,13 @@ int					get_info_l(void);
 int					align_info(void);
 void				sort_num(int a[], int array_size, int rev);
 void				sort_str(char **str, int array_size_str);
-int					sort_date(void);
-int					sort_size(void);
-int					sort_version(void);
-int					sort_reverse(void);
 int					output(void);
 int					clean(void);
-void				merge_sort(ll_list **headref);
+void				merge_sort(ll_list **headref, t_static2 *opt);
 ll_list				*merge(ll_list *a, ll_list *b);
+ll_list				*merge_r(ll_list *a, ll_list *b);
+ll_list				*merge_size(ll_list *a, ll_list *b);
+ll_list				*merge_size_r(ll_list *a, ll_list *b);
 void				split(ll_list *source, ll_list **front, ll_list **back);
 void				get_info(struct dirent *dp, ll_list *current, char *str);
 void				get_permission(struct stat fileStat, ll_list *current);
@@ -115,6 +117,8 @@ max_len				*get_len(ll_list *current);
 int					nblen(int len);
 void				ft_putnstr(int max, char *str);
 void				ft_putnnbr(int max, int info);
-void				ft_print_time(const time_t timefile, char *str);
+void				ft_print_time(const time_t *timefile);
+void				print_total(ll_list *current, t_static2 *opt);
+
 
 #endif

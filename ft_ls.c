@@ -19,10 +19,12 @@ void	ft_ls(t_static2 *opt, ll_list *cur)
 		if (cur->filename[0] != '.' || opt->a)
 		{
 			if (cur->filename[0] == '.')
-				((cur->isdir) && opt->a) ? ft_putstr_b(cur->filename) : ft_putstr(cur->filename);
+				((cur->isdir) && opt->a) ? ft_putstr_b(cur->filename) 
+											: ft_putstr(cur->filename);
 			else
-				(cur->isdir) ? ft_putstr_b(cur->filename) : ft_putstr(cur->filename);
-			ft_putstr("\t");
+				(cur->isdir) ? ft_putstr_b(cur->filename)
+								: ft_putstr(cur->filename);
+			ft_putstr(" ");
 		}
 		cur = cur->next;
 	}
@@ -74,7 +76,13 @@ int		main(int ac, char **av)
 	}
 	if (ac == 2)
 	{
-		options(av[1], &opt);
+		if(av[1][0] == '-')
+		{
+			options(av[1], &opt);
+			choose_prog(&opt, ".");
+		}
+		else
+		//ft_parse(av, &opt, ac);
 		choose_prog(&opt, av[1]);
 	}
 	if (ac > 2)

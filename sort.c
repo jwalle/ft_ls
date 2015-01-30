@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-void	merge_sort(ll_list **headref)
+void	merge_sort(ll_list **headref, t_static2 *opt)
 {
 	ll_list *head;
 	ll_list *a;
@@ -22,10 +22,18 @@ void	merge_sort(ll_list **headref)
 	if (!head || !head->next)
 		return;
 	split(head, &a, &b);
-	merge_sort(&a);
-	merge_sort(&b);
+	merge_sort(&a, opt);
+	merge_sort(&b, opt);
 	
-	*headref = merge(a, b);
+	if (opt->r && opt->dft)
+		*headref = merge_r(a, b);
+	if (opt->S && opt->no_r)
+		*headref = merge_size(a, b);
+	if (opt->S && opt->r)
+		*headref = merge_size_r(a, b);
+	else
+		*headref = merge(a, b);
+	
 }
 
 ll_list	*merge(ll_list *a, ll_list *b)
@@ -49,6 +57,29 @@ ll_list	*merge(ll_list *a, ll_list *b)
 	}
 	return (result);
 }
+
+ll_list	*merge_r(ll_list *a, ll_list *b)
+{
+	ll_list *result;
+	
+	if (!a)
+		return(b);
+	if (!b)
+		return(a);
+		
+	if (ft_strcmp(a->filename, b->filename) > 0)
+	{
+		result = a;
+		result->next = merge_r(a->next, b);
+	}
+	else
+	{
+		result = b;
+		result->next = merge_r(a, b->next);
+	}
+	return (result);
+}
+
 
 void	split(ll_list *source, ll_list **front, ll_list **back)
 {
@@ -81,7 +112,49 @@ void	split(ll_list *source, ll_list **front, ll_list **back)
 }
 
 
+ll_list	*merge_size(ll_list *a, ll_list *b)
+{
+	ll_list *result;
+	
+	if (!a)
+		return(b);
+	if (!b)
+		return(a);
+		
+	if (a->size > b->size)
+	{
+		result = a;
+		result->next = merge_size(a->next, b);
+	}
+	else
+	{
+		result = b;
+		result->next = merge_size(a, b->next);
+	}
+	return (result);
+}
 
+ll_list	*merge_size_r(ll_list *a, ll_list *b)
+{
+	ll_list *result;
+	
+	if (!a)
+		return(b);
+	if (!b)
+		return(a);
+		
+	if (a->size < b->size)
+	{
+		result = a;
+		result->next = merge_size_r(a->next, b);
+	}
+	else
+	{
+		result = b;
+		result->next = merge_size_r(a, b->next);
+	}
+	return (result);
+}
 
 
 void	sort_str(char **str, int array_size_str)
@@ -106,64 +179,4 @@ void	sort_str(char **str, int array_size_str)
 		}
 		i++;
 	}
-}
-
-void	sort_num(int a[], int array_size, int rev)
-{
-	int		i;
-	int		j;
-	int		temp;
-
-	i = 0;
-	while (i < (array_size - 1))
-	{
-		j = 0;
-		while (j < (array_size - 1 - i))
-		{
-			if (rev == 0)
-			{
-				if (a[j] > a[j+1])
-				{
-					temp = a[j+1];
-					a[j+1] = a[j];
-					a[j] = temp;
-				}
-			}
-			else
-			{
-				if (a[j] < a[j+1])
-				{
-					temp = a[j+1];
-					a[j+1] = a[j];
-					a[j] = temp;
-				}
-			}
-			j++;
-		}
-		i++;
-	}
-} // trop long. faire un sort et un sort_r pour CHAQUE...?
-
-int		sort_date(void)
-{
-	printf("placeholder date\n");
-	return (1);
-}
-
-int		sort_size(void)
-{
-	printf("placeholder sort size bonus\n");
-	return (1);
-}
-
-int		sort_version(void)
-{
-	printf("placeholder sort version bonus\n");
-	return (1);
-}
-
-int		sort_reverse(void)
-{
-	printf("placeholder sort reverse\n");
-	return (1);
 }

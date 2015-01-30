@@ -37,7 +37,7 @@ void	ft_putnstr(int max, char *str)
 		i++;
 	}
 	ft_putstr(str);
-	ft_putstr("  ");
+	ft_putstr(" ");
 }
 
 void	ft_putnnbr(int max, int info)
@@ -53,3 +53,9 @@ void	ft_putnnbr(int max, int info)
 	ft_putnbr(info);
 	ft_putchar(' ');
 }
+
+/*
+void	*ft_timecopy(time_t *current, const time_t *current)
+{
+	
+}*/
