@@ -19,6 +19,14 @@ void	ft_putstr_b(char *str)
 	ft_putstr(RESET);
 }
 
+void print_parsed(char *str, t_static2 *opt)
+{
+	ft_putstr(str);
+	ft_putstr(": \n");
+	choose_prog(opt, str);
+	ft_putchar('\n');
+}
+
 int		output(void)
 {
 	printf("placeholder output\n");

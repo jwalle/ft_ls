@@ -31,44 +31,39 @@ void	ft_ls(t_static2 *opt, ll_list *cur)
 	ft_putchar('\n');
 }
 
-void	ft_parse(char **av, t_static2 *opt, int ac)
+void	ft_parse(char **av, t_static2 *opt)
 {
 	char 	**str;
 	int		i;
 	int 	j;
+	DIR		*dir;
 
 	i = -1;
 	j = 0;
-	str = malloc(sizeof(*str) * ac);
+	str = malloc(sizeof(*str) * 512);
 	opt->dft = 1;
-	while (ac > ++j)
+	while (av[++j])
 	{
 		if(av[j][0] ==  '-')
 		{
 			options(av[j], opt);
 			opt->dft = 0;
 		}
+		else if (av[j][0] != '-' && (dir = opendir(av[j])) == NULL)
+			fail_open_directory(av[j]); //devrait marcher si av est un nom de fichier...
 		else
-		{
-			str[++i] = ft_strnew(ft_strlen(av[j]));
-			ft_strcpy(str[i], av[j]);
-		}
+			str[++i] = ft_strdup(av[j]);
 	}
-	j = 0;
-	while (str[j])
-	{
-		ft_putstr(str[j]);
-		ft_putstr(": \n");
-		choose_prog(opt, str[j]);
-		ft_putchar('\n');
-		j++;
-	}
+	j = -1;
+	while (str[++j])
+		print_parsed(str[j], opt);
 }
 
 int		main(int ac, char **av)
 {
 	static t_static2 opt;
 	
+	opt.sort = 'd';
 	if (ac == 1)
 	{
 		opt.dft = 1;
@@ -76,18 +71,16 @@ int		main(int ac, char **av)
 	}
 	if (ac == 2)
 	{
+		//ft_parse(av, &opt);
 		if(av[1][0] == '-')
 		{
 			options(av[1], &opt);
 			choose_prog(&opt, ".");
 		}
 		else
-		//ft_parse(av, &opt, ac);
-		choose_prog(&opt, av[1]);
+			choose_prog(&opt, av[1]);
 	}
 	if (ac > 2)
-	{
-		ft_parse(av, &opt, ac);
-	}
+		ft_parse(av, &opt);
 	return (0);
 }

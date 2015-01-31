@@ -25,11 +25,12 @@ void	merge_sort(ll_list **ref, t_static2 *opt)
 	merge_sort(&a, opt);
 	merge_sort(&b, opt);
 	
-	if (opt->S)
-		(opt->r) ? (*ref = merge_size_r(a, b)) : (*ref = merge_size(a, b));
-	if (opt->t)
+	
+	if (opt->sort == 't')
 		(opt->r) ? (*ref = merge_time_r(a, b)) : (*ref = merge_time(a, b));
-	if (opt->dft)
+	else if (opt->sort == 'S')
+		(opt->r) ? (*ref = merge_size_r(a, b)) : (*ref = merge_size(a, b));
+	else if (opt->sort == 'd')
 		(opt->r) ? (*ref = merge_r(a, b)) : (*ref = merge(a, b));
 }
 
