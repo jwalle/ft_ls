@@ -54,8 +54,19 @@ void	ft_putnnbr(int max, int info)
 	ft_putchar(' ');
 }
 
-/*
-void	*ft_timecopy(time_t *current, const time_t *current)
+int	is_opt(char *str)
 {
-	
-}*/
+	if (str[0] == '-')
+	{
+		if (str[1] != '\0')
+			return (1);
+		else
+		{
+			fail_open_directory(str);
+			return (-1);
+		}
+	}
+	else
+		return (0);
+	return (0);
+}

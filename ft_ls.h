@@ -121,6 +121,8 @@ void				ft_print_time(time_t timefile);
 void				print_total(ll_list *current, t_static2 *opt);
 void 				print_parsed(char *str, t_static2 *opt);
 void				ft_parse(char **av, t_static2 *opt);
+int					is_opt(char *str);
+
 
 
 #endif

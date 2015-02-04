@@ -36,7 +36,8 @@ void	ft_parse(char **av, t_static2 *opt)
 	char 	**str;
 	int		i;
 	int 	j;
-	DIR		*dir;
+	int		k;
+	//DIR		*dir;
 
 	i = -1;
 	j = 0;
@@ -44,15 +45,22 @@ void	ft_parse(char **av, t_static2 *opt)
 	opt->dft = 1;
 	while (av[++j])
 	{
-		if(av[j][0] ==  '-')
+		k = is_opt(av[j]);
+		if (k != 0)
 		{
-			options(av[j], opt);
-			opt->dft = 0;
+			if (k == 1)
+			{
+				options(av[j], opt);
+				opt->dft = 0;
+			}
 		}
-		else if (av[j][0] != '-' && (dir = opendir(av[j])) == NULL)
-			fail_open_directory(av[j]); //devrait marcher si av est un nom de fichier...
 		else
-			str[++i] = ft_strdup(av[j]);
+		{
+			str[++i] = ft_strdup(av[j]);  
+		//if (k == -1)
+		//	++j;
+		//else if (((dir = opendir(av[j])) == NULL) || (is_opt(av[j]) < 0))
+		//	fail_open_directory(av[j]); //devrait marcher si av est un nom de fichier...
 	}
 	j = -1;
 	while (str[++j])
@@ -72,7 +80,8 @@ int		main(int ac, char **av)
 	if (ac == 2)
 	{
 		//ft_parse(av, &opt);
-		if(av[1][0] == '-')
+		//if(av[1][0] == '-')
+		if (is_opt(av[1]))
 		{
 			options(av[1], &opt);
 			choose_prog(&opt, ".");

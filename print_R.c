@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
+/*
 void	stock_R(char **av, t_static2 *opt)
 {
 	DIR				*dir;
@@ -47,4 +47,4 @@ void	ft_print_R(char *str, t_static2 *opt)
 	{
 		
 	}
-}
+}*/
