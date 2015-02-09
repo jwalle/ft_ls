@@ -1,5 +1,16 @@
-all : 
-	gcc -c -g -Wall -Werror -Wextra -I libft/includes/ *.c
-	gcc -o ft_ls -g *.o -L libft/ -lft
-	rm -rf *.o
+NAME = ft_ls
 
+all : $(NAME)
+
+$(NAME) :
+	gcc -c -g -Wall -Werror -Wextra -I libft/includes/ *.c
+	gcc -o $(NAME) -g *.o -L libft/ -lft
+
+clean:
+	/bin/rm -f *.o
+
+fclean:
+	/bin/rm -f *.o
+	/bin/rm -f $(NAME)
+
+re: fclean all

@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:46:15 by jwalle            #+#    #+#             */
-/*   Updated: 2015/01/29 14:32:57 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/02/09 18:23:03 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ ll_list     *ll_stock(char *str, t_static2 *opt)
     current = head;
     if ((dir = opendir(str)) == NULL)
         fail_open_directory(str);
-	printf("plop1\n");
-
+	//printf("plop1 stock\n");
     while ((dp = readdir(dir)))
     {
         if (head == NULL)

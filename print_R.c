@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/28 14:50:53 by jwalle            #+#    #+#             */
-/*   Updated: 2015/01/29 14:29:21 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/02/09 18:18:33 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,19 @@ void	stock_R(char **av, t_static2 *opt)
 void	ft_print_R(char *av, t_static2 *opt, ll_list *cur)
 {
 	char	*path;
-	
+	ll_list	*plop;
+
+	plop = cur;
 	printf("print_R\n");
 	while(cur)
 	{
 		if (cur->isdir)
 		{
-			path = correct_path(av, cur->filename);
+			path = correct_path(av, plop->filename);
 			printf("%s\n", path);
 			//opt->R = 0;
 			choose_prog(opt, path);
 		}
-		cur = cur->next;
+		plop = plop->next;
 	}
 }

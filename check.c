@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:31:11 by jwalle            #+#    #+#             */
-/*   Updated: 2015/01/29 16:25:14 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/02/09 18:57:15 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ int		error(char c)
 	&& c != 'A' && c != 'd' && c != 'g' && c != 'G' && c != 'i'
 	&& c != 'n' && c != 'S' && c != 'v' && c != 's')
 	{
-		ft_putstr("ft_ls: invalid option -- '");
+		ft_putstr("ft_ls: illegal option -- '");
 		ft_putchar(c);
 		ft_putstr("'\n");
-		ft_putstr("Try 'ls --help for more information.\n");
+		ft_putstr("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]\n");
+		//ft_putstr("Try 'ls --help for more information.\n");
 		return (1);
 	}
 	else
@@ -38,6 +39,8 @@ void		options(char *av, t_static2 *opt)
 	opt->no_r = 1;
 	while (av[i])
 	{
+		if (error(av[i])) //DOIT QUITTER LE PROGRAMME
+			return;
 		if (av[i] == 'l')
 			opt->l = 1;
 		if (av[i] == 'a')
@@ -81,31 +84,30 @@ void		options2(char *av, t_static2 *opt)
 			opt->v = 1;
 		if (av[i] == 'A')
 			opt->A = 1;
-		if (error(av[i]))
-			return;
-		i++;
+				i++;
 	}
 }
 
 int		choose_prog(t_static2 *opt, char *av)
 {
 	ll_list		*cur;
-	char		**str;
+	//char		**str;
 	
-	str = malloc(sizeof(*str) * 512);
+	//str = malloc(sizeof(*str) * 512);
 	
 		//printf("Option r.%s\n", av);
-	printf("placeholder choose program to run\n");
+	//printf("placeholder choose program to run\n");
 	cur = ll_stock(av, opt);
 	merge_sort(&cur, opt);
 	if (opt->R)
 	{
-		print_l(cur, opt);
+		//printf("plop choose\n");
+		ft_ls(opt, cur);
 		ft_print_R(av, opt, cur);
 	}
-	if (opt->dft)
+	else if (opt->dft)
 		ft_ls(opt, cur);
-	if (opt->l)
+	else if (opt->l)
 	{
 		print_l(cur, opt);
 		return(1);

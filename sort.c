@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:46:15 by jwalle            #+#    #+#             */
-/*   Updated: 2014/12/13 19:24:13 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/02/09 18:56:39 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	merge_sort(ll_list **ref, t_static2 *opt)
 	ll_list *head;
 	ll_list *a;
 	ll_list *b;
-	
+
+	//printf("merge\n");	
 	head  = *ref;
 	if (!head || !head->next)
 		return;
