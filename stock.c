@@ -23,6 +23,8 @@ ll_list     *ll_stock(char *str, t_static2 *opt)
     current = head;
     if ((dir = opendir(str)) == NULL)
         fail_open_directory(str);
+	printf("plop1\n");
+
     while ((dp = readdir(dir)))
     {
         if (head == NULL)

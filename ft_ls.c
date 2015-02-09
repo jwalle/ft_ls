@@ -55,7 +55,7 @@ void	ft_parse(char **av, t_static2 *opt)
 			}
 		}
 		else
-		{
+		
 			str[++i] = ft_strdup(av[j]);  
 		//if (k == -1)
 		//	++j;
@@ -79,8 +79,6 @@ int		main(int ac, char **av)
 	}
 	if (ac == 2)
 	{
-		//ft_parse(av, &opt);
-		//if(av[1][0] == '-')
 		if (is_opt(av[1]))
 		{
 			options(av[1], &opt);

@@ -40,8 +40,6 @@ void		options(char *av, t_static2 *opt)
 	{
 		if (av[i] == 'l')
 			opt->l = 1;
-		if (av[i] == 'R')
-			opt->R = 1;
 		if (av[i] == 'a')
 			opt->a = 1;
 		if (av[i] == 'r')
@@ -55,6 +53,8 @@ void		options(char *av, t_static2 *opt)
 			opt->sort = 'S';
 		if (av[i] == 's')
 			opt->s = 1;
+		if (av[i] == 'R')
+			opt->R = 1;
 		i++;
 	}
 	options2(av, opt);
@@ -94,11 +94,15 @@ int		choose_prog(t_static2 *opt, char *av)
 	
 	str = malloc(sizeof(*str) * 512);
 	
-	if (opt->R)
-		printf("Option r.%s\n", av);
-	//printf("placeholder choose program to run\n");
+		//printf("Option r.%s\n", av);
+	printf("placeholder choose program to run\n");
 	cur = ll_stock(av, opt);
 	merge_sort(&cur, opt);
+	if (opt->R)
+	{
+		print_l(cur, opt);
+		ft_print_R(av, opt, cur);
+	}
 	if (opt->dft)
 		ft_ls(opt, cur);
 	if (opt->l)
@@ -106,7 +110,8 @@ int		choose_prog(t_static2 *opt, char *av)
 		print_l(cur, opt);
 		return(1);
 	}
-
+	else
+		ft_ls(opt, cur);
 	free(cur);
 	return (1);
 }

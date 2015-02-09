@@ -118,6 +118,7 @@ int					nblen(int len);
 void				ft_putnstr(int max, char *str);
 void				ft_putnnbr(int max, int info);
 void				ft_print_time(time_t timefile);
+void				ft_print_R(char *av, t_static2 *opt, ll_list *cur);
 void				print_total(ll_list *current, t_static2 *opt);
 void 				print_parsed(char *str, t_static2 *opt);
 void				ft_parse(char **av, t_static2 *opt);

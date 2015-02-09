@@ -38,13 +38,22 @@ void	stock_R(char **av, t_static2 *opt)
 	}
 	opt->R = 0;
 }
+*/
 
-void	ft_print_R(char *str, t_static2 *opt)
+void	ft_print_R(char *av, t_static2 *opt, ll_list *cur)
 {
-	DIR		*dir;
+	char	*path;
 	
-	while((dir = opendir(str)) != NULL)
+	printf("print_R\n");
+	while(cur)
 	{
-		
+		if (cur->isdir)
+		{
+			path = correct_path(av, cur->filename);
+			printf("%s\n", path);
+			//opt->R = 0;
+			choose_prog(opt, path);
+		}
+		cur = cur->next;
 	}
-}*/
+}
