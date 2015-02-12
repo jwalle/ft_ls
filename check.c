@@ -93,13 +93,13 @@ int		choose_prog(t_static2 *opt, char *av)
 {
 	ll_list		*cur;
 	
-	//printf("placeholder choose program to run\n");
 	cur = ll_stock(av, opt);
 	merge_sort(&cur, opt);
 	if (cur)
 	{
 		if (opt->R)
 		{
+			print_folder(av);
 			if (opt->l)
 				print_l(cur, opt);
 			else

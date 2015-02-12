@@ -123,6 +123,7 @@ void				ft_print_time(time_t timefile);
 void				ft_print_R(char *av, t_static2 *opt, ll_list *cur);
 void				print_total(ll_list *current, t_static2 *opt);
 void 				print_parsed(char *str, t_static2 *opt);
+void 				print_folder(char *str); 
 void				ft_parse(char **av, t_static2 *opt);
 int					is_opt(char *str);
 char				file_type(struct stat fileStat);

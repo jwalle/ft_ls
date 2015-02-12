@@ -22,9 +22,15 @@ void	ft_putstr_b(char *str)
 void print_parsed(char *str, t_static2 *opt)
 { 
 	ft_putstr(str);
-	ft_putstr(": \n");
+	ft_putstr(":\n");
 	choose_prog(opt, str);
 	ft_putchar('\n');
+}
+
+void print_folder(char *str)
+{
+	ft_putstr(str);
+	ft_putstr(":\n");
 }
 
 int		output(void)
