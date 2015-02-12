@@ -41,7 +41,7 @@ void		options(char *av, t_static2 *opt)
 	{
 		if (error(av[i])) //DOIT QUITTER LE PROGRAMME
 			return;
-		if (av[i] == 'l')
+		if (av[i] == 'l' || av[i] == 'G' || av[i] == 'g')
 			opt->l = 1;
 		if (av[i] == 'a')
 			opt->a = 1;
@@ -110,10 +110,11 @@ int		choose_prog(t_static2 *opt, char *av)
 	else if (opt->l)
 	{
 		print_l(cur, opt);
-		return(1);
+		//return(1);
 	}
 	else
 		ft_ls(opt, cur);
-	free(cur);
+	//free(cur);
+	free_all(cur);
 	return (1);
 }

@@ -23,7 +23,6 @@ ll_list     *ll_stock(char *str, t_static2 *opt)
     current = head;
     if ((dir = opendir(str)) == NULL)
         fail_open_directory(str);
-	//printf("plop1 stock\n");
     while ((dp = readdir(dir)))
     {
         if (head == NULL)
@@ -37,10 +36,12 @@ ll_list     *ll_stock(char *str, t_static2 *opt)
                 current = current->next;
             current = ll_copy_cur(dp->d_name, dp, current, str);
         }
-		if (current->isdir && ft_strcmp(current->filename, ".") && opt->R)
-			ll_stock(current->filename, opt);
+		//if (current->isdir && ft_strcmp(current->filename, ".") && opt->R)
+			//ll_stock(current->filename, opt);
     }
 	close_directory(dir);
+	if (opt->A)
+		printf("plop1 stock\n");
     return (head);
 }
 
@@ -99,7 +100,7 @@ void	get_permission(struct stat fileStat, ll_list *current)
 	char *str;
 
 	str = ft_strnew(10);	
-	str[0] = S_ISDIR(fileStat.st_mode) ? 'd' : '-';
+	str[0] = file_type(fileStat);
 	str[1] = (fileStat.st_mode & S_IRUSR) ? 'r' : '-';
 	str[2] = (fileStat.st_mode & S_IWUSR) ? 'w' : '-';
 	str[3] = (fileStat.st_mode & S_IXUSR) ? 'x' : '-';
@@ -110,4 +111,24 @@ void	get_permission(struct stat fileStat, ll_list *current)
 	str[8] = (fileStat.st_mode & S_IWOTH) ? 'w' : '-';
 	str[9] = (fileStat.st_mode & S_IXOTH) ? 'x' : '-';
 	current->perm = ft_strdup(str);
+	free(str);
+}
+
+char	file_type(struct stat fileStat)
+{
+	char c;
+
+	if (S_ISDIR(fileStat.st_mode))
+		c = 'd';
+	else if (S_ISBLK(fileStat.st_mode))
+		c = 'b';
+	else if (S_ISCHR(fileStat.st_mode))
+		c = 'c';
+	else if (S_ISLNK(fileStat.st_mode))
+		c = 'l';
+	else if (S_ISFIFO(fileStat.st_mode))
+		c = 'p';
+	else
+		c = '-';
+	return (c);
 }

@@ -47,9 +47,9 @@ void	ft_print_R(char *av, t_static2 *opt, ll_list *cur)
 
 	plop = cur;
 	printf("print_R\n");
-	while(cur)
+	while(plop)
 	{
-		if (cur->isdir)
+		if (plop->isdir)
 		{
 			path = correct_path(av, plop->filename);
 			printf("%s\n", path);
