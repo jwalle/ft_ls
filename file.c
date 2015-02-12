@@ -57,17 +57,11 @@ int		can_open(struct dirent *dp, char *str)
 
 char	*correct_path(char *s1, char *s2)
 {
-	int		i;
-	int		j;
 	char	*str;
 	
-	i = ft_strlen(s1);
-	j = ft_strlen(s2);
-	str = ft_strnew(i + j + 1);
-	ft_strcpy(str, s1);
-	if (s1[i] != '/')
-		ft_strcat(str, "/");
-	ft_strcat(str, s2);
+	str = ft_strdup(s1);
+	str = ft_strjoin(str, "/");
+	str = ft_strjoin(str, s2);
+
 	return (str);
-	printf("plop2\n");
 }

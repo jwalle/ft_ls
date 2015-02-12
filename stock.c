@@ -22,7 +22,10 @@ ll_list     *ll_stock(char *str, t_static2 *opt)
     head = NULL;
     current = head;
     if ((dir = opendir(str)) == NULL)
+    {
         fail_open_directory(str);
+        return (NULL);
+    }
     while ((dp = readdir(dir)))
     {
         if (head == NULL)
@@ -36,8 +39,6 @@ ll_list     *ll_stock(char *str, t_static2 *opt)
                 current = current->next;
             current = ll_copy_cur(dp->d_name, dp, current, str);
         }
-		//if (current->isdir && ft_strcmp(current->filename, ".") && opt->R)
-			//ll_stock(current->filename, opt);
     }
 	close_directory(dir);
 	if (opt->A)

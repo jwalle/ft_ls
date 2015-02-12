@@ -22,7 +22,6 @@ int		nblen(int len)
 		len = len/10;
 		++i;
 	}
-	//printf("i get len = %d\n", i);
 	return(i);
 }
 

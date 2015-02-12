@@ -31,7 +31,7 @@ int		error(char c)
 	return (1);
 }
 
-void		options(char *av, t_static2 *opt)
+int		options(char *av, t_static2 *opt)
 {
 	int i;
 	
@@ -39,16 +39,16 @@ void		options(char *av, t_static2 *opt)
 	opt->no_r = 1;
 	while (av[i])
 	{
-		if (error(av[i])) //DOIT QUITTER LE PROGRAMME
-			return;
-		if (av[i] == 'l' || av[i] == 'G' || av[i] == 'g')
+		if (error(av[i]))
+			return (0);
+		if (av[i] == 'l' || av[i] == 'G' || av[i] == 'g' || av[i] == 'n')
 			opt->l = 1;
 		if (av[i] == 'a')
 			opt->a = 1;
 		if (av[i] == 'r')
 		{
 			opt->r = 1;
-			opt->no_r = 0;
+			opt->no_r = 0;	
 		}
 		if (av[i] == 't')
 			opt->sort = 't';
@@ -60,10 +60,10 @@ void		options(char *av, t_static2 *opt)
 			opt->R = 1;
 		i++;
 	}
-	options2(av, opt);
+	return(options2(av, opt));
 }
 
-void		options2(char *av, t_static2 *opt)
+int		options2(char *av, t_static2 *opt)
 {
 	int i;
 
@@ -86,35 +86,34 @@ void		options2(char *av, t_static2 *opt)
 			opt->A = 1;
 				i++;
 	}
+	return (1);
 }
 
 int		choose_prog(t_static2 *opt, char *av)
 {
 	ll_list		*cur;
-	//char		**str;
 	
-	//str = malloc(sizeof(*str) * 512);
-	
-		//printf("Option r.%s\n", av);
 	//printf("placeholder choose program to run\n");
 	cur = ll_stock(av, opt);
 	merge_sort(&cur, opt);
-	if (opt->R)
+	if (cur)
 	{
-		//printf("plop choose\n");
-		ft_ls(opt, cur);
-		ft_print_R(av, opt, cur);
+		if (opt->R)
+		{
+			if (opt->l)
+				print_l(cur, opt);
+			else
+				ft_ls(opt, cur);
+			ft_putchar('\n');
+			ft_print_R(av, opt, cur);
+		}
+		else if (opt->dft)
+			ft_ls(opt, cur);
+		else if (opt->l)
+			print_l(cur, opt);
+		else
+			ft_ls(opt, cur);
+		free_all(cur);
 	}
-	else if (opt->dft)
-		ft_ls(opt, cur);
-	else if (opt->l)
-	{
-		print_l(cur, opt);
-		//return(1);
-	}
-	else
-		ft_ls(opt, cur);
-	//free(cur);
-	free_all(cur);
 	return (1);
 }

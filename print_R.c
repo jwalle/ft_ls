@@ -43,19 +43,18 @@ void	stock_R(char **av, t_static2 *opt)
 void	ft_print_R(char *av, t_static2 *opt, ll_list *cur)
 {
 	char	*path;
-	ll_list	*plop;
 
-	plop = cur;
-	printf("print_R\n");
-	while(plop)
+	//printf("print_R\n");
+	while(cur)
 	{
-		if (plop->isdir)
+		if (cur->isdir && ft_strcmp(cur->filename, ".") && ft_strcmp(cur->filename, ".."))
 		{
-			path = correct_path(av, plop->filename);
+			path = correct_path(av, cur->filename);
 			printf("%s\n", path);
-			//opt->R = 0;
+			cur = cur->next;
 			choose_prog(opt, path);
 		}
-		plop = plop->next;
+		else
+			cur = cur->next;
 	}
 }

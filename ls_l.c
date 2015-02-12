@@ -16,7 +16,7 @@ void	print_l(ll_list *current, t_static2 *opt)
 {
 	max_len *len;
 	
-	len = get_len(current);
+	len = get_len(current, opt);
 	print_total(current, opt);
 	while (current)
 	{
@@ -28,9 +28,9 @@ void	print_l(ll_list *current, t_static2 *opt)
 			ft_putstr(" ");
 			ft_putnnbr(len->link_len, current->link);
 			if (!opt->g)
-				ft_putnstr(len->uid_len, current->uid);
+				(!opt->n) ? ft_putnstr(len->uid_len, current->uid) : ft_putnnbr(len->uid_nb_len, current->uid_nb);
 			if (!opt->G)
-				ft_putnstr(len->gid_len, current->gid);	
+				(!opt->n) ? ft_putnstr(len->gid_len, current->gid) : ft_putnnbr(len->gid_nb_len, current->gid_nb);	
 			ft_putnnbr(len->size_len, current->size);
 			ft_print_time(current->time);
 			(!current->isdir) ? ft_putstr(current->filename) 
@@ -39,6 +39,7 @@ void	print_l(ll_list *current, t_static2 *opt)
 		}
 	current = current->next;
 	}
+	free(len);
 }
 
 void	print_total(ll_list *current, t_static2 *opt)
@@ -59,7 +60,7 @@ void	print_total(ll_list *current, t_static2 *opt)
 	ft_putchar('\n');
 }
 
-max_len		*get_len(ll_list *current)
+max_len		*get_len(ll_list *current, t_static2 *opt)
 {
 	int		i;
 	max_len *size;
@@ -73,26 +74,38 @@ max_len		*get_len(ll_list *current)
 	size->name_len = 0;
 	size->day_len = 0;
 	size->bsize_len = 0;
+	size->uid_nb_len = 0;
+	size->gid_nb_len = 0;
+
 	while(current)
 	{
-		i = nblen(current->link);
-		if(i > size->link_len)
-			size->link_len = i;
-		i = ft_strlen(current->gid);
-		if(i > size->gid_len)
-			size->gid_len = i;
-		i = ft_strlen(current->uid);
-		if(i > size->uid_len)
-			size->uid_len = i;
-		i = nblen(current->size);
-		if(i > size->size_len)
-			size->size_len = i;
-		i = ft_strlen(current->filename);
-		if (i > size->name_len)
-			size->name_len = i;
-		i = nblen(current->bsize);
-		if (i > size->bsize_len)
-			size->bsize_len = i;
+		if (current->filename[0] != '.' || opt->a)
+		{
+			i = nblen(current->link);
+			if(i > size->link_len)
+				size->link_len = i;
+			i = ft_strlen(current->gid);
+			if(i > size->gid_len)
+				size->gid_len = i;
+			i = ft_strlen(current->uid);
+			if(i > size->uid_len)
+				size->uid_len = i;
+			i = nblen(current->size);
+			if(i > size->size_len)
+				size->size_len = i;
+			i = ft_strlen(current->filename);
+			if (i > size->name_len)
+				size->name_len = i;
+			i = nblen(current->bsize);
+			if (i > size->bsize_len)
+				size->bsize_len = i;
+			i = nblen(current->uid_nb);
+			if (i > size->uid_nb_len)
+				size->uid_nb_len = i;
+			i = nblen(current->gid_nb);
+			if (i > size->gid_nb_len)
+				size->gid_nb_len = i;
+		}
 		current = current->next;
 	}
 	return(size);

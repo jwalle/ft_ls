@@ -18,6 +18,8 @@ void	ft_ls(t_static2 *opt, ll_list *cur)
 	{
 		if (cur->filename[0] != '.' || opt->a)
 		{
+			if(opt->s)
+				ft_putnnbr(0, cur->bsize);
 			if (cur->filename[0] == '.')
 				((cur->isdir) && opt->a) ? ft_putstr_b(cur->filename) 
 											: ft_putstr(cur->filename);
@@ -50,7 +52,8 @@ void	ft_parse(char **av, t_static2 *opt)
 		{
 			if (k == 1)
 			{
-				options(av[j], opt);
+				if (options(av[j], opt) == 0)
+					return ;
 				opt->dft = 0;
 			}
 		}
@@ -81,7 +84,8 @@ int		main(int ac, char **av)
 	{
 		if (is_opt(av[1]))
 		{
-			options(av[1], &opt);
+			if (options(av[1], &opt) == 0)
+				return (0);
 			choose_prog(&opt, ".");
 		}
 		else
