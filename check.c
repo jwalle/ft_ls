@@ -107,8 +107,6 @@ int		choose_prog(t_static2 *opt, char *av)
 			ft_putchar('\n');
 			ft_print_R(av, opt, cur);
 		}
-		else if (opt->dft)
-			ft_ls(opt, cur);
 		else if (opt->l)
 			print_l(cur, opt);
 		else

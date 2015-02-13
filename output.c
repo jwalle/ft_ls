@@ -14,7 +14,8 @@
 
 void	ft_putstr_b(char *str)
 {
-	ft_putstr(ANSI_COLOR_RED);
+	//ft_putstr(ANSI_COLOR_RED);
+	ft_putstr(BOLD);
 	ft_putstr(str);
 	ft_putstr(RESET);
 }
@@ -31,16 +32,4 @@ void print_folder(char *str)
 {
 	ft_putstr(str);
 	ft_putstr(":\n");
-}
-
-int		output(void)
-{
-	printf("placeholder output\n");
-	return (1);
-}
-
-int		clean(void)
-{
-	printf("placeholder clean\n");
-	return (1);
 }
