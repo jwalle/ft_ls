@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-ll_list     *ll_stock(char *str, t_static2 *opt)
+ll_list     *ll_stock(char *str)
 {
     ll_list         *head;
     ll_list         *current;
@@ -22,10 +22,7 @@ ll_list     *ll_stock(char *str, t_static2 *opt)
     head = NULL;
     current = head;
     if ((dir = opendir(str)) == NULL)
-    {
-        fail_open_directory(str);
-        return (NULL);
-    }
+        return(fail_open_directory(str));
     while ((dp = readdir(dir)))
     {
         if (head == NULL)
@@ -41,8 +38,6 @@ ll_list     *ll_stock(char *str, t_static2 *opt)
         }
     }
 	close_directory(dir);
-	if (opt->A)
-		printf("plop1 stock\n");
     return (head);
 }
 

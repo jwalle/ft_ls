@@ -37,7 +37,6 @@ typedef	struct		s_static
 	int				gid_nb_len;
 	int				size_len;
 	int				bsize_len;
-	int				day_len;
 }					max_len;
 
 typedef struct		element
@@ -83,19 +82,19 @@ typedef	struct		directory
 }					d_list;
 
 int					main(int ac, char **av);
-void				fail_open_directory(char *str);
+void				*fail_open_directory(char *str);
 struct dirent 		*get_content(DIR *dir);
 void				close_directory(DIR *dir);
 int					can_open(struct dirent *dp, char *str);
 char				*correct_path(char *s1, char *s2);
 int					error(char c);
-ll_list				*ll_stock(char *str, t_static2 *opt);
+ll_list				*ll_stock(char *str);
 ll_list    			*ll_copy_new(char *str, struct dirent *dp, ll_list *head, char *str2);
 ll_list				*ll_copy_cur(char *str, struct dirent *dp, ll_list *cur, char *str2);
 void				ft_putstr_b(char *str);
 void				ft_ls(t_static2 *opt, ll_list *cur);
-int				options(char *av, t_static2 *opt);
-int				options2(char *av, t_static2 *opt);
+int					options(char *av, t_static2 *opt);
+int					options2(char *av, t_static2 *opt);
 int					choose_prog(t_static2 *opt, char *av);
 int					options_l(void);
 int					get_info_l(void);
@@ -126,9 +125,9 @@ void				ft_parse(char **av, t_static2 *opt);
 int					is_opt(char *str);
 char				file_type(struct stat fileStat);
 void				free_all(ll_list *cur);
-
-
-
+int					check_len_nb(int n, int max);
+int					check_len_str(char *str, int max);
+max_len				*set_size_zero(max_len *size);
 
 
 #endif

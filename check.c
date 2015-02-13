@@ -14,7 +14,6 @@
 
 int		error(char c)
 {
-	//printf("c = %c\n", c);
 	if (c != 'l' && c != 'R' && c != 'a' && c != 'r' && c != 't'
 	&& c != 'A' && c != 'd' && c != 'g' && c != 'G' && c != 'i'
 	&& c != 'n' && c != 'S' && c != 'v' && c != 's')
@@ -22,8 +21,8 @@ int		error(char c)
 		ft_putstr("ft_ls: illegal option -- '");
 		ft_putchar(c);
 		ft_putstr("'\n");
-		ft_putstr("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]\n");
-		//ft_putstr("Try 'ls --help for more information.\n");
+		ft_putstr("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] ");
+		ft_putstr("[file ...]\n");
 		return (1);
 	}
 	else
@@ -93,7 +92,7 @@ int		choose_prog(t_static2 *opt, char *av)
 {
 	ll_list		*cur;
 	
-	cur = ll_stock(av, opt);
+	cur = ll_stock(av);
 	merge_sort(&cur, opt);
 	if (cur)
 	{

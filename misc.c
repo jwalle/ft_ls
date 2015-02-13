@@ -69,3 +69,19 @@ int	is_opt(char *str)
 		return (0);
 	return (0);
 }
+
+max_len	*set_size_zero(max_len *size)
+{
+	size = malloc(sizeof(max_len));
+
+	size->size_len = 0;
+	size->link_len = 0;
+	size->uid_len = 0;
+	size->gid_len = 0;
+	size->name_len = 0;
+	size->bsize_len = 0;
+	size->uid_nb_len = 0;
+	size->gid_nb_len = 0;
+
+	return(size);
+}

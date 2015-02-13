@@ -43,7 +43,6 @@ void	ft_parse(char **av, t_static2 *opt)
 	i = -1;
 	j = 0;
 	str = malloc(sizeof(*str) * 512);
-	opt->dft = 1;
 	while (av[++j])
 	{
 		k = is_opt(av[j]);
@@ -53,7 +52,6 @@ void	ft_parse(char **av, t_static2 *opt)
 			{
 				if (options(av[j], opt) == 0)
 					return ;
-				opt->dft = 0;
 			}
 		}
 		else

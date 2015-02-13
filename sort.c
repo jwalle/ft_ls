@@ -18,7 +18,6 @@ void	merge_sort(ll_list **ref, t_static2 *opt)
 	ll_list *a;
 	ll_list *b;
 
-	//printf("merge\n");	
 	head  = *ref;
 	if (!head || !head->next)
 		return;

@@ -28,13 +28,15 @@ void	print_l(ll_list *current, t_static2 *opt)
 			ft_putstr(" ");
 			ft_putnnbr(len->link_len, current->link);
 			if (!opt->g)
-				(!opt->n) ? ft_putnstr(len->uid_len, current->uid) : ft_putnnbr(len->uid_nb_len, current->uid_nb);
+				(!opt->n) ? ft_putnstr(len->uid_len, current->uid) :
+							ft_putnnbr(len->uid_nb_len, current->uid_nb);
 			if (!opt->G)
-				(!opt->n) ? ft_putnstr(len->gid_len, current->gid) : ft_putnnbr(len->gid_nb_len, current->gid_nb);	
+				(!opt->n) ? ft_putnstr(len->gid_len, current->gid) :
+							ft_putnnbr(len->gid_nb_len, current->gid_nb);	
 			ft_putnnbr(len->size_len, current->size);
 			ft_print_time(current->time);
-			(!current->isdir) ? ft_putstr(current->filename) 
-								: ft_putstr_b(current->filename);
+			(!current->isdir) ? ft_putstr(current->filename) :
+								ft_putstr_b(current->filename);
 			ft_putchar('\n');
 		}
 	current = current->next;
@@ -42,93 +44,45 @@ void	print_l(ll_list *current, t_static2 *opt)
 	free(len);
 }
 
-void	print_total(ll_list *current, t_static2 *opt)
-{
-	int total;
-	
-	total = 0;
-	while (current)
-	{
-		if (current->filename[0] != '.' || opt->a)
-		{
-			total = total + current->bsize;
-		}
-	current = current->next;
-	}
-	ft_putstr("total ");
-	ft_putnbr(total);
-	ft_putchar('\n');
-}
-
 max_len		*get_len(ll_list *current, t_static2 *opt)
 {
-	int		i;
-	max_len *size;
+	max_len *size = {0};
 
-	i = 0;
-	size = malloc(sizeof(max_len));
-	size->size_len = 0;
-	size->link_len = 0;
-	size->uid_len = 0;
-	size->gid_len = 0;
-	size->name_len = 0;
-	size->day_len = 0;
-	size->bsize_len = 0;
-	size->uid_nb_len = 0;
-	size->gid_nb_len = 0;
-
+	size = set_size_zero(size);	
 	while(current)
 	{
 		if (current->filename[0] != '.' || opt->a)
 		{
-			i = nblen(current->link);
-			if(i > size->link_len)
-				size->link_len = i;
-			i = ft_strlen(current->gid);
-			if(i > size->gid_len)
-				size->gid_len = i;
-			i = ft_strlen(current->uid);
-			if(i > size->uid_len)
-				size->uid_len = i;
-			i = nblen(current->size);
-			if(i > size->size_len)
-				size->size_len = i;
-			i = ft_strlen(current->filename);
-			if (i > size->name_len)
-				size->name_len = i;
-			i = nblen(current->bsize);
-			if (i > size->bsize_len)
-				size->bsize_len = i;
-			i = nblen(current->uid_nb);
-			if (i > size->uid_nb_len)
-				size->uid_nb_len = i;
-			i = nblen(current->gid_nb);
-			if (i > size->gid_nb_len)
-				size->gid_nb_len = i;
+			size->link_len = check_len_nb(current->link, size->link_len);
+			size->gid_len = check_len_str(current->gid, size->gid_len);
+			size->uid_len = check_len_str(current->uid, size->uid_len);
+			size->size_len = check_len_nb(current->size, size->size_len);
+			size->name_len = check_len_str(current->filename, size->name_len);
+			size->bsize_len = check_len_nb(current->bsize, size->bsize_len);
+			size->uid_nb_len = check_len_nb(current->uid_nb, size->uid_nb_len);
+			size->gid_nb_len = check_len_nb(current->gid_nb, size->gid_nb_len);
 		}
 		current = current->next;
 	}
 	return(size);
 }
 
-void	ft_print_time(time_t timefile)
+int		check_len_nb(int n, int max)
 {
-	char	*str;
-	int		i;
-	time_t current;
+	int	i;
 
-	str = ctime(&timefile);
-	current = time(NULL);
-	if (current - timefile < 0 || current - timefile >= 15552000)
-	{
-		i = ft_strlen(str) - 1;
-		str[i] = 0;
-		while(str[i] != ' ')
-			--i;
-		write(1, str + 4, 7);
-		ft_putstr(str + i);
-	}
-	else
-		write(1, str + 4, ft_strlen(str) - 13);
-	ft_putchar(' ');
+	i = nblen(n);
+	if(i > max)
+		return (i);
+	return(max);
+}
+
+int		check_len_str(char *str, int max)
+{
+	int i;
+
+	i = ft_strlen(str);
+	if(i > max)
+		return (i);
+	return (max);
 }
