@@ -20,11 +20,17 @@ void	ft_putstr_b(char *str)
 }
 
 void print_parsed(char *str, t_static2 *opt)
-{ 
-	ft_putstr(str);
-	ft_putstr(":\n");
+{
+	struct stat		fileStat;
+
+	if(!stat(str, &fileStat) && (opendir(str)))
+	{
+		ft_putstr(str);
+		ft_putstr(":\n");
+	}
 	choose_prog(opt, str);
-	ft_putchar('\n');
+	if(!stat(str, &fileStat) && (opendir(str)))
+		ft_putchar('\n');
 }
 
 void print_folder(char *str)

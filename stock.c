@@ -22,7 +22,7 @@ ll_list     *ll_stock(char *str)
     head = NULL;
     current = head;
     if ((dir = opendir(str)) == NULL)
-        return(fail_open_directory(str));
+		return(fail_open_directory(str));
     while ((dp = readdir(dir)))
     {
         if (head == NULL)
@@ -86,9 +86,6 @@ void	get_info(struct dirent *dp, ll_list *current, char *str)
 	current->size = fileStat.st_size;
 	current->bsize = fileStat.st_blocks / 2;
 	current->time = fileStat.st_mtime;
-
-	//printf("%s, %d, %s\n", current->uid, current->size, ctime(&current->time));
-	//printf("time 1 : %s\n", ctime(current->time)); // verifier que les id sont bons.
 }
 
 void	get_permission(struct stat fileStat, ll_list *current)

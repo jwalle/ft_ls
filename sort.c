@@ -105,6 +105,5 @@ void	split(ll_list *source, ll_list **front, ll_list **back)
 		*front = source;
 		*back = slow->next;
 		slow->next = NULL;
-	}
-	
+	}	
 }

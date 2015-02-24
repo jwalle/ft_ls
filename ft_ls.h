@@ -82,7 +82,7 @@ typedef	struct		directory
 }					d_list;
 
 int					main(int ac, char **av);
-void				*fail_open_directory(char *str);
+ll_list				*fail_open_directory(char *str);
 struct dirent 		*get_content(DIR *dir);
 void				close_directory(DIR *dir);
 int					can_open(struct dirent *dp, char *str);
@@ -128,6 +128,7 @@ void				free_all(ll_list *cur);
 int					check_len_nb(int n, int max);
 int					check_len_str(char *str, int max);
 max_len				*set_size_zero(max_len *size);
-
+void				get_info_file(ll_list *current, struct stat fileStat);
+ll_list    			*ll_copy_new_file(char *str, ll_list *head, struct stat fileStat);
 
 #endif
