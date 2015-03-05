@@ -1,16 +1,25 @@
-/*--HEADER--*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_st.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/03/05 13:03:25 by jwalle            #+#    #+#             */
+/*   Updated: 2015/03/05 13:03:54 by jwalle           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_ls.h"
 
 ll_list	*merge_size(ll_list *a, ll_list *b)
 {
 	ll_list *result;
-	
+
 	if (!a)
-		return(b);
+		return (b);
 	if (!b)
-		return(a);
-		
+		return (a);
 	if (a->size > b->size)
 	{
 		result = a;
@@ -27,12 +36,11 @@ ll_list	*merge_size(ll_list *a, ll_list *b)
 ll_list	*merge_size_r(ll_list *a, ll_list *b)
 {
 	ll_list *result;
-	
+
 	if (!a)
-		return(b);
+		return (b);
 	if (!b)
-		return(a);
-		
+		return (a);
 	if (a->size < b->size)
 	{
 		result = a;
@@ -49,12 +57,11 @@ ll_list	*merge_size_r(ll_list *a, ll_list *b)
 ll_list	*merge_time(ll_list *a, ll_list *b)
 {
 	ll_list *result;
-	
+
 	if (!a)
-		return(b);
+		return (b);
 	if (!b)
-		return(a);
-		
+		return (a);
 	if (a->time > b->time)
 	{
 		result = a;
@@ -71,12 +78,11 @@ ll_list	*merge_time(ll_list *a, ll_list *b)
 ll_list	*merge_time_r(ll_list *a, ll_list *b)
 {
 	ll_list *result;
-	
+
 	if (!a)
-		return(b);
+		return (b);
 	if (!b)
-		return(a);
-		
+		return (a);
 	if (a->time < b->time)
 	{
 		result = a;

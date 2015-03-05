@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:31:11 by jwalle            #+#    #+#             */
-/*   Updated: 2015/02/09 18:57:15 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/05 12:46:11 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ int		error(char c)
 		return (1);
 	}
 	else
-		return(0);
+		return (0);
 	return (1);
 }
 
 int		options(char *av, t_static2 *opt)
 {
 	int i;
-	
+
 	i = 1;
 	opt->no_r = 1;
 	while (av[i])
@@ -47,7 +47,7 @@ int		options(char *av, t_static2 *opt)
 		if (av[i] == 'r')
 		{
 			opt->r = 1;
-			opt->no_r = 0;	
+			opt->no_r = 0;
 		}
 		if (av[i] == 't')
 			opt->sort = 't';
@@ -59,7 +59,7 @@ int		options(char *av, t_static2 *opt)
 			opt->R = 1;
 		i++;
 	}
-	return(options2(av, opt));
+	return (options2(av, opt));
 }
 
 int		options2(char *av, t_static2 *opt)
@@ -83,7 +83,7 @@ int		options2(char *av, t_static2 *opt)
 			opt->v = 1;
 		if (av[i] == 'A')
 			opt->A = 1;
-				i++;
+		i++;
 	}
 	return (1);
 }
@@ -91,7 +91,7 @@ int		options2(char *av, t_static2 *opt)
 int		choose_prog(t_static2 *opt, char *av)
 {
 	ll_list		*cur;
-	
+
 	cur = ll_stock(av);
 	merge_sort(&cur, opt);
 	if (cur)
@@ -104,7 +104,7 @@ int		choose_prog(t_static2 *opt, char *av)
 			else
 				ft_ls(opt, cur);
 			ft_putchar('\n');
-			ft_print_R(av, opt, cur);
+			ft_print_r(av, opt, cur);
 		}
 		else if (opt->l)
 			print_l(cur, opt);

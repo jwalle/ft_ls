@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 08:48:45 by jwalle            #+#    #+#             */
-/*   Updated: 2015/02/09 18:16:02 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/05 12:21:28 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	ft_ls(t_static2 *opt, ll_list *cur)
 	{
 		if (cur->filename[0] != '.' || opt->a)
 		{
-			if(opt->s)
+			if (opt->s)
 				ft_putnnbr(0, cur->bsize);
 			if (cur->filename[0] == '.')
-				((cur->isdir) && opt->a) ? ft_putstr_b(cur->filename) 
+				((cur->isdir) && opt->a) ? ft_putstr_b(cur->filename)
 											: ft_putstr(cur->filename);
 			else
 				(cur->isdir) ? ft_putstr_b(cur->filename)
@@ -35,9 +35,9 @@ void	ft_ls(t_static2 *opt, ll_list *cur)
 
 void	ft_parse(char **av, t_static2 *opt)
 {
-	char 	**str;
+	char	**str;
 	int		i;
-	int 	j;
+	int		j;
 	int		k;
 
 	i = -1;
@@ -55,7 +55,7 @@ void	ft_parse(char **av, t_static2 *opt)
 			}
 		}
 		else
-			str[++i] = ft_strdup(av[j]);  
+			str[++i] = ft_strdup(av[j]);
 	}
 	j = -1;
 	while (str[++j])
@@ -65,7 +65,7 @@ void	ft_parse(char **av, t_static2 *opt)
 int		main(int ac, char **av)
 {
 	static t_static2 opt;
-	
+
 	opt.sort = 'd';
 	if (ac == 1)
 		choose_prog(&opt, ".");

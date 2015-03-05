@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:46:15 by jwalle            #+#    #+#             */
-/*   Updated: 2015/02/09 18:56:39 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/05 13:01:57 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,28 @@ void	merge_sort(ll_list **ref, t_static2 *opt)
 	ll_list *a;
 	ll_list *b;
 
-	head  = *ref;
+	head = *ref;
 	if (!head || !head->next)
-		return;
+		return ;
 	split(head, &a, &b);
 	merge_sort(&a, opt);
 	merge_sort(&b, opt);
-	
-	
 	if (opt->sort == 't')
-		(opt->r) ? (*ref = merge_time_r(a, b)) : (*ref = merge_time(a, b));
+		(opt->r) ? *ref = (merge_time_r(a, b)) : (merge_time(a, b));
 	else if (opt->sort == 'S')
-		(opt->r) ? (*ref = merge_size_r(a, b)) : (*ref = merge_size(a, b));
+		(opt->r) ? (*ref = merge_size_r(a, b)) : (*ref = merge_size(a, b)); //marche plus.
 	else if (opt->sort == 'd')
-		(opt->r) ? (*ref = merge_r(a, b)) : (*ref = merge(a, b));
+		(opt->r) ? *ref = (merge_r(a, b)) : (merge(a, b)); //tri default.
 }
 
 ll_list	*merge(ll_list *a, ll_list *b)
 {
 	ll_list *result;
-	
+
 	if (!a)
-		return(b);
+		return (b);
 	if (!b)
-		return(a);
-		
+		return (a);
 	if (ft_strcmp(a->filename, b->filename) < 0)
 	{
 		result = a;
@@ -59,12 +56,11 @@ ll_list	*merge(ll_list *a, ll_list *b)
 ll_list	*merge_r(ll_list *a, ll_list *b)
 {
 	ll_list *result;
-	
+
 	if (!a)
-		return(b);
+		return (b);
 	if (!b)
-		return(a);
-		
+		return (a);
 	if (ft_strcmp(a->filename, b->filename) > 0)
 	{
 		result = a;
@@ -78,12 +74,11 @@ ll_list	*merge_r(ll_list *a, ll_list *b)
 	return (result);
 }
 
-
 void	split(ll_list *source, ll_list **front, ll_list **back)
 {
 	ll_list	*fast;
 	ll_list *slow;
-	
+
 	if (!source || !source->next)
 	{
 		*front = source;
@@ -105,5 +100,5 @@ void	split(ll_list *source, ll_list **front, ll_list **back)
 		*front = source;
 		*back = slow->next;
 		slow->next = NULL;
-	}	
+	}
 }

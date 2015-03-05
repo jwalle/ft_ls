@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 18:02:22 by jwalle            #+#    #+#             */
-/*   Updated: 2014/12/13 18:28:26 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/05 12:43:48 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@ void	ft_putstr_b(char *str)
 	ft_putstr(RESET);
 }
 
-void print_parsed(char *str, t_static2 *opt)
+void	print_parsed(char *str, t_static2 *opt)
 {
-	struct stat		fileStat;
+	struct stat	filestat;
 
-	if(!stat(str, &fileStat) && (opendir(str)))
+	if (!stat(str, &filestat) && (opendir(str)))
 	{
 		ft_putstr(str);
 		ft_putstr(":\n");
 	}
 	choose_prog(opt, str);
-	if(!stat(str, &fileStat) && (opendir(str)))
+	if (!stat(str, &filestat) && (opendir(str)))
 		ft_putchar('\n');
 }
 
-void print_folder(char *str)
+void	print_folder(char *str)
 {
 	ft_putstr(str);
 	ft_putstr(":\n");
@@ -42,7 +42,7 @@ void print_folder(char *str)
 void	print_total(ll_list *current, t_static2 *opt)
 {
 	int total;
-	
+
 	total = 0;
 	while (current)
 	{
@@ -50,7 +50,7 @@ void	print_total(ll_list *current, t_static2 *opt)
 		{
 			total = total + current->bsize;
 		}
-	current = current->next;
+		current = current->next;
 	}
 	ft_putstr("total ");
 	ft_putnbr(total);
@@ -61,7 +61,7 @@ void	ft_print_time(time_t timefile)
 {
 	char	*str;
 	int		i;
-	time_t current;
+	time_t	current;
 
 	str = ctime(&timefile);
 	current = time(NULL);
@@ -69,7 +69,7 @@ void	ft_print_time(time_t timefile)
 	{
 		i = ft_strlen(str) - 1;
 		str[i] = 0;
-		while(str[i] != ' ')
+		while (str[i] != ' ')
 			--i;
 		write(1, str + 4, 7);
 		ft_putstr(str + i);

@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/28 14:48:03 by jwalle            #+#    #+#             */
-/*   Updated: 2015/01/28 14:48:07 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/05 12:40:41 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 int		nblen(int len)
 {
 	int		i;
-	
+
 	i = (len <= 0 ? 1 : 0);
 	while (len)
 	{
-		len = len/10;
+		len = len / 10;
 		++i;
 	}
-	return(i);
+	return (i);
 }
 
 void	ft_putnstr(int max, char *str)
 {
 	int i;
-	
+
 	i = 0;
 	while ((int)(ft_strlen(str) + i) < max)
 	{
@@ -42,7 +42,7 @@ void	ft_putnstr(int max, char *str)
 void	ft_putnnbr(int max, int info)
 {
 	int	i;
-	
+
 	i = 0;
 	while ((nblen(info) + i) < max)
 	{
@@ -53,7 +53,7 @@ void	ft_putnnbr(int max, int info)
 	ft_putchar(' ');
 }
 
-int	is_opt(char *str)
+int		is_opt(char *str)
 {
 	if (str[0] == '-')
 	{
@@ -73,7 +73,6 @@ int	is_opt(char *str)
 max_len	*set_size_zero(max_len *size)
 {
 	size = malloc(sizeof(max_len));
-
 	size->size_len = 0;
 	size->link_len = 0;
 	size->uid_len = 0;
@@ -82,6 +81,5 @@ max_len	*set_size_zero(max_len *size)
 	size->bsize_len = 0;
 	size->uid_nb_len = 0;
 	size->gid_nb_len = 0;
-
-	return(size);
+	return (size);
 }

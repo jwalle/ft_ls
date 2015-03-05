@@ -6,16 +6,16 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:54:27 by jwalle            #+#    #+#             */
-/*   Updated: 2015/01/28 14:32:24 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/05 12:36:56 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	print_l(ll_list *current, t_static2 *opt)
+void		print_l(ll_list *current, t_static2 *opt)
 {
 	max_len *len;
-	
+
 	len = get_len(current, opt);
 	print_total(current, opt);
 	while (current)
@@ -23,7 +23,7 @@ void	print_l(ll_list *current, t_static2 *opt)
 		if (current->filename[0] != '.' || opt->a)
 		{
 			if (opt->s)
-			ft_putnnbr(len->bsize_len, current->bsize);
+				ft_putnnbr(len->bsize_len, current->bsize);
 			ft_putstr(current->perm);
 			ft_putstr(" ");
 			ft_putnnbr(len->link_len, current->link);
@@ -32,14 +32,14 @@ void	print_l(ll_list *current, t_static2 *opt)
 							ft_putnnbr(len->uid_nb_len, current->uid_nb);
 			if (!opt->G)
 				(!opt->n) ? ft_putnstr(len->gid_len, current->gid) :
-							ft_putnnbr(len->gid_nb_len, current->gid_nb);	
+							ft_putnnbr(len->gid_nb_len, current->gid_nb);
 			ft_putnnbr(len->size_len, current->size);
 			ft_print_time(current->time);
 			(!current->isdir) ? ft_putstr(current->filename) :
 								ft_putstr_b(current->filename);
 			ft_putchar('\n');
 		}
-	current = current->next;
+		current = current->next;
 	}
 	free(len);
 }
@@ -48,8 +48,8 @@ max_len		*get_len(ll_list *current, t_static2 *opt)
 {
 	max_len *size = {0};
 
-	size = set_size_zero(size);	
-	while(current)
+	size = set_size_zero(size);
+	while (current)
 	{
 		if (current->filename[0] != '.' || opt->a)
 		{
@@ -64,25 +64,25 @@ max_len		*get_len(ll_list *current, t_static2 *opt)
 		}
 		current = current->next;
 	}
-	return(size);
+	return (size);
 }
 
-int		check_len_nb(int n, int max)
+int			check_len_nb(int n, int max)
 {
 	int	i;
 
 	i = nblen(n);
-	if(i > max)
+	if (i > max)
 		return (i);
-	return(max);
+	return (max);
 }
 
-int		check_len_str(char *str, int max)
+int			check_len_str(char *str, int max)
 {
 	int i;
 
 	i = ft_strlen(str);
-	if(i > max)
+	if (i > max)
 		return (i);
 	return (max);
 }
