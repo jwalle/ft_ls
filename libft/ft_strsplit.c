@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/11 15:13:03 by jwalle            #+#    #+#             */
-/*   Updated: 2014/11/16 16:34:04 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/05 14:25:23 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ char			**ft_strsplit(char const *s, char c)
 		else
 			i++;
 	}
-	tab[nbw] = '\0';
+	tab[nbw] = 0;
 	return (tab);
 }

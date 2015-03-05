@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:46:15 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/05 13:01:57 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/05 14:46:17 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	merge_sort(ll_list **ref, t_static2 *opt)
 	merge_sort(&a, opt);
 	merge_sort(&b, opt);
 	if (opt->sort == 't')
-		(opt->r) ? *ref = (merge_time_r(a, b)) : (merge_time(a, b));
+		*ref = (opt->r) ? (merge_time_r(a, b)) : (merge_time(a, b));
 	else if (opt->sort == 'S')
-		(opt->r) ? (*ref = merge_size_r(a, b)) : (*ref = merge_size(a, b)); //marche plus.
+		*ref = (opt->r) ? (merge_size_r(a, b)) : (merge_size(a, b));
 	else if (opt->sort == 'd')
-		(opt->r) ? *ref = (merge_r(a, b)) : (merge(a, b)); //tri default.
+		*ref = (opt->r) ? (merge_r(a, b)) : (merge(a, b));
 }
 
 ll_list	*merge(ll_list *a, ll_list *b)

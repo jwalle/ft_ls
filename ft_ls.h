@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:36:17 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/05 12:44:59 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/05 16:55:13 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ typedef struct		element
 {
 	char			*filename;
 	int				isdir;
+	int				islink;
 	char			*perm;
 	int				link;
+	char			*link_path;
 	char			*uid;
 	int				uid_nb;
 	char			*gid;
@@ -95,6 +97,7 @@ void				ft_putstr_b(char *str);
 void				ft_ls(t_static2 *opt, ll_list *cur);
 int					options(char *av, t_static2 *opt);
 int					options2(char *av, t_static2 *opt);
+int					options3(char *av, t_static2 *opt);
 int					choose_prog(t_static2 *opt, char *av);
 int					options_l(void);
 int					get_info_l(void);

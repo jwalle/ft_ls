@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 08:48:45 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/05 12:21:28 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/05 16:02:51 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@ void	ft_ls(t_static2 *opt, ll_list *cur)
 			else
 				(cur->isdir) ? ft_putstr_b(cur->filename)
 								: ft_putstr(cur->filename);
-			ft_putstr(" ");
+			ft_putstr("\n");
 		}
 		cur = cur->next;
 	}
-	ft_putchar('\n');
 }
 
 void	ft_parse(char **av, t_static2 *opt)

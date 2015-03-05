@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:46:15 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/05 13:10:17 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/05 17:11:45 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,10 @@ void	get_info(struct dirent *dp, ll_list *current, char *str)
 	struct passwd	*pwd;
 	struct group	*grp;
 	char			*path;
-
+	ssize_t				r;
+ 
 	path = correct_path(str, dp->d_name);
-	stat(path, &filestat);
+	lstat(path, &filestat);
 	get_permission(filestat, current);
 	current->isdir = S_ISDIR(filestat.st_mode);
 	current->link = filestat.st_nlink;
@@ -86,6 +87,15 @@ void	get_info(struct dirent *dp, ll_list *current, char *str)
 	current->size = filestat.st_size;
 	current->bsize = filestat.st_blocks / 2;
 	current->time = filestat.st_mtime;
+	if (S_ISLNK(filestat.st_mode))
+	{
+		current->islink = 1;
+		current->link_path = malloc(filestat.st_size + 1);
+		r = readlink(path, current->link_path, filestat.st_size);
+		current->link_path[r] = '\0';
+	}
+	else
+		current->islink = 0;
 }
 
 void	get_permission(struct stat filestat, ll_list *current)
@@ -100,7 +110,6 @@ void	get_permission(struct stat filestat, ll_list *current)
 	str[4] = (filestat.st_mode & S_IRGRP) ? 'r' : '-';
 	str[5] = (filestat.st_mode & S_IWGRP) ? 'w' : '-';
 	str[6] = (filestat.st_mode & S_IXGRP) ? 'x' : '-';
-	str[7] = (filestat.st_mode & S_IROTH) ? 'r' : '-';
 	str[8] = (filestat.st_mode & S_IWOTH) ? 'w' : '-';
 	str[9] = (filestat.st_mode & S_IXOTH) ? 'x' : '-';
 	current->perm = ft_strdup(str);
@@ -121,6 +130,8 @@ char	file_type(struct stat filestat)
 		c = 'l';
 	else if (S_ISFIFO(filestat.st_mode))
 		c = 'p';
+	else if (S_ISSOCK(filestat.st_mode))
+		c = 's';
 	else
 		c = '-';
 	return (c);

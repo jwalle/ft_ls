@@ -6,11 +6,24 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:54:27 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/05 12:36:56 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/05 16:54:56 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+static void	sub_print_l(ll_list *current, t_static2 *opt, max_len *len)
+{
+	if (opt->s)
+		ft_putnnbr(len->bsize_len, current->bsize);
+	ft_putstr(current->perm);
+	ft_putstr(" ");
+	ft_putnnbr(len->link_len, current->link);
+	if (!opt->g)
+		(!opt->n) ? ft_putnstr(len->uid_len, current->uid) :
+					ft_putnnbr(len->uid_nb_len, current->uid_nb);
+
+}
 
 void		print_l(ll_list *current, t_static2 *opt)
 {
@@ -22,21 +35,19 @@ void		print_l(ll_list *current, t_static2 *opt)
 	{
 		if (current->filename[0] != '.' || opt->a)
 		{
-			if (opt->s)
-				ft_putnnbr(len->bsize_len, current->bsize);
-			ft_putstr(current->perm);
-			ft_putstr(" ");
-			ft_putnnbr(len->link_len, current->link);
-			if (!opt->g)
-				(!opt->n) ? ft_putnstr(len->uid_len, current->uid) :
-							ft_putnnbr(len->uid_nb_len, current->uid_nb);
-			if (!opt->G)
+			sub_print_l(current, opt, len);
+						if (!opt->G)
 				(!opt->n) ? ft_putnstr(len->gid_len, current->gid) :
 							ft_putnnbr(len->gid_nb_len, current->gid_nb);
 			ft_putnnbr(len->size_len, current->size);
 			ft_print_time(current->time);
 			(!current->isdir) ? ft_putstr(current->filename) :
 								ft_putstr_b(current->filename);
+			if (current->islink)
+			{
+				ft_putstr(" -> ");
+				ft_putstr(current->link_path);
+			}
 			ft_putchar('\n');
 		}
 		current = current->next;
@@ -46,8 +57,9 @@ void		print_l(ll_list *current, t_static2 *opt)
 
 max_len		*get_len(ll_list *current, t_static2 *opt)
 {
-	max_len *size = {0};
+	max_len *size;
 
+	size = malloc(sizeof(max_len));
 	size = set_size_zero(size);
 	while (current)
 	{
