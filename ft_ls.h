@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:36:17 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/05 16:55:13 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/06 16:31:53 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,14 @@ typedef	struct		s_static
 	int				gid_nb_len;
 	int				size_len;
 	int				bsize_len;
+	int				maj_len;
+	int				min_len;
 }					max_len;
 
 typedef struct		element
 {
 	char			*filename;
+	dev_t			device;
 	int				isdir;
 	int				islink;
 	char			*perm;
@@ -53,6 +56,8 @@ typedef struct		element
 	int				size;
 	int				bsize;
 	time_t			time;
+	long			major;
+	long			minor;
 	struct element	*next;
 }					ll_list;
 
@@ -132,6 +137,7 @@ int					check_len_nb(int n, int max);
 int					check_len_str(char *str, int max);
 max_len				*set_size_zero(max_len *size);
 void				get_info_file(ll_list *current, struct stat filestat);
+void				min_maj(ll_list *current);
 ll_list				*ll_copy_new_file(char *str, ll_list *head,
 										struct stat filestat);
 

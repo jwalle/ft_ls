@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:54:27 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/05 16:54:56 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/06 16:37:18 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ static void	sub_print_l(ll_list *current, t_static2 *opt, max_len *len)
 
 }
 
+static void	print_maj_min(ll_list *current, max_len *len)
+{
+	ft_putnnbr(len->maj_len, current->major);
+	ft_putstr(",");
+	ft_putnnbr(len->min_len, current->minor);
+}
+
+
 void		print_l(ll_list *current, t_static2 *opt)
 {
 	max_len *len;
@@ -36,10 +44,13 @@ void		print_l(ll_list *current, t_static2 *opt)
 		if (current->filename[0] != '.' || opt->a)
 		{
 			sub_print_l(current, opt, len);
-						if (!opt->G)
+			if (!opt->G)
 				(!opt->n) ? ft_putnstr(len->gid_len, current->gid) :
 							ft_putnnbr(len->gid_nb_len, current->gid_nb);
-			ft_putnnbr(len->size_len, current->size);
+			if(!current->major)
+				ft_putnnbr(len->size_len, current->size);
+			else
+				print_maj_min(current, len);
 			ft_print_time(current->time);
 			(!current->isdir) ? ft_putstr(current->filename) :
 								ft_putstr_b(current->filename);
@@ -73,6 +84,8 @@ max_len		*get_len(ll_list *current, t_static2 *opt)
 			size->bsize_len = check_len_nb(current->bsize, size->bsize_len);
 			size->uid_nb_len = check_len_nb(current->uid_nb, size->uid_nb_len);
 			size->gid_nb_len = check_len_nb(current->gid_nb, size->gid_nb_len);
+			size->min_len = check_len_nb(current->minor, size->min_len);
+			size->maj_len = check_len_nb(current->major, size->maj_len);
 		}
 		current = current->next;
 	}
@@ -98,3 +111,5 @@ int			check_len_str(char *str, int max)
 		return (i);
 	return (max);
 }
+
+//http://man7.org/tlpi/code/online/diff/files/t_stat.c.html

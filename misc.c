@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/28 14:48:03 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/05 12:40:41 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/06 16:16:05 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,7 @@ max_len	*set_size_zero(max_len *size)
 	size->bsize_len = 0;
 	size->uid_nb_len = 0;
 	size->gid_nb_len = 0;
+	size->maj_len = 0;
+	size->min_len = 0;
 	return (size);
 }
