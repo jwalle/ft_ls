@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 18:02:22 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/05 12:43:48 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/09 13:22:22 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	ft_putstr_b(char *str)
 {
-	ft_putstr(BOLD);
+	//ft_putstr(BOLD);
 	ft_putstr(str);
-	ft_putstr(RESET);
+	//ft_putstr(RESET);
 }
 
-void	print_parsed(char *str, t_static2 *opt)
+void	print_parsed(char *str, t_static2 *opt, int i)
 {
 	struct stat	filestat;
 
@@ -29,7 +29,7 @@ void	print_parsed(char *str, t_static2 *opt)
 		ft_putstr(":\n");
 	}
 	choose_prog(opt, str);
-	if (!stat(str, &filestat) && (opendir(str)))
+	if (/*!stat(str, &filestat)*/i > 0)
 		ft_putchar('\n');
 }
 

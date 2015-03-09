@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/28 14:48:03 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/05 12:40:41 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/09 13:11:35 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int		is_opt(char *str)
 			return (1);
 		else
 		{
-			fail_open_directory(str);
-			return (-1);
+			//fail_open_directory(str);
+			return (0); // -1
 		}
 	}
 	else
@@ -81,5 +81,7 @@ max_len	*set_size_zero(max_len *size)
 	size->bsize_len = 0;
 	size->uid_nb_len = 0;
 	size->gid_nb_len = 0;
+	size->maj_len = 0;
+	size->min_len = 0;
 	return (size);
 }

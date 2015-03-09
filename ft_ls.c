@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 08:48:45 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/05 16:02:51 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/09 13:46:11 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_parse(char **av, t_static2 *opt)
 	}
 	j = -1;
 	while (str[++j])
-		print_parsed(str[j], opt);
+		print_parsed(str[j], opt, i--);
 }
 
 int		main(int ac, char **av)

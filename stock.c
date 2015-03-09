@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:46:15 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/05 17:11:45 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/06 16:31:47 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void	get_info(struct dirent *dp, ll_list *current, char *str)
 	current->size = filestat.st_size;
 	current->bsize = filestat.st_blocks / 2;
 	current->time = filestat.st_mtime;
+	current->device = filestat.st_dev;
+	min_maj(current);
 	if (S_ISLNK(filestat.st_mode))
 	{
 		current->islink = 1;
@@ -136,3 +138,11 @@ char	file_type(struct stat filestat)
 		c = '-';
 	return (c);
 }
+
+void	min_maj(ll_list *current)
+{
+
+	current->major = major(current->device);
+	current->minor = minor(current->device);
+}
+
