@@ -6,11 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:54:27 by jwalle            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2015/03/17 16:21:21 by jwalle           ###   ########.fr       */
-=======
-/*   Updated: 2015/03/06 16:37:18 by jwalle           ###   ########.fr       */
->>>>>>> deaf210320afd4928cb36b15f6e409c8fde313cd
+/*   Updated: 2015/03/17 17:14:47 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +30,6 @@ static void	print_maj_min(ll_list *current, max_len *len)
 	ft_putstr(",");
 	ft_putnnbr(len->min_len, current->minor);
 }
-
 
 void		print_l(ll_list *current, t_static2 *opt)
 {
