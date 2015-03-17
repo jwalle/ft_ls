@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:31:11 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/09 14:09:59 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/17 16:24:04 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,12 @@ int		choose_prog(t_static2 *opt, char *av)
 			ft_print_r(av, opt, cur);
 		}
 		else if (opt->l)
-			print_l(cur, opt);
+		{
+			if(ft_strcmp(av, "/dev") == 0)
+				print_dev(cur, opt);
+			else
+				print_l(cur, opt);
+		}
 		else
 			ft_ls(opt, cur);
 		free_all(cur);

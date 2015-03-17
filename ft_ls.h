@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:36:17 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/09 13:18:54 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/17 16:24:49 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ void				split(ll_list *source, ll_list **front, ll_list **back);
 void				get_info(struct dirent *dp, ll_list *current, char *str);
 void				get_permission(struct stat filestat, ll_list *current);
 void				print_l(ll_list *curent, t_static2 *opt);
+void				print_dev(ll_list *curent, t_static2 *opt);
 max_len				*get_len(ll_list *current, t_static2 *opt);
 int					nblen(int len);
 void				ft_putnstr(int max, char *str);

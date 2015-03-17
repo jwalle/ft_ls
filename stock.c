@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:46:15 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/06 16:31:47 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/17 17:02:43 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ void	get_info(struct dirent *dp, ll_list *current, char *str)
 	struct passwd	*pwd;
 	struct group	*grp;
 	char			*path;
+	char			*temp;
 	ssize_t				r;
- 
+
+	temp = ft_strnew(256);
 	path = correct_path(str, dp->d_name);
 	lstat(path, &filestat);
 	get_permission(filestat, current);
@@ -92,8 +94,8 @@ void	get_info(struct dirent *dp, ll_list *current, char *str)
 	if (S_ISLNK(filestat.st_mode))
 	{
 		current->islink = 1;
-		current->link_path = malloc(filestat.st_size + 1);
-		r = readlink(path, current->link_path, filestat.st_size);
+		r = readlink(path, temp, filestat.st_size);
+		current->link_path = ft_strdup(temp);
 		current->link_path[r] = '\0';
 	}
 	else
@@ -112,6 +114,7 @@ void	get_permission(struct stat filestat, ll_list *current)
 	str[4] = (filestat.st_mode & S_IRGRP) ? 'r' : '-';
 	str[5] = (filestat.st_mode & S_IWGRP) ? 'w' : '-';
 	str[6] = (filestat.st_mode & S_IXGRP) ? 'x' : '-';
+	str[7] = (filestat.st_mode & S_IROTH) ? 'r' : '-';
 	str[8] = (filestat.st_mode & S_IWOTH) ? 'w' : '-';
 	str[9] = (filestat.st_mode & S_IXOTH) ? 'x' : '-';
 	current->perm = ft_strdup(str);
@@ -141,7 +144,8 @@ char	file_type(struct stat filestat)
 
 void	min_maj(ll_list *current)
 {
-
+	current->major = 0;
+	current->minor = 0;
 	current->major = major(current->device);
 	current->minor = minor(current->device);
 }

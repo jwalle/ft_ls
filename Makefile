@@ -10,7 +10,8 @@ SRC = check.c \
 	  print_r.c \
 	  sort.c \
 	  sort_st.c \
-	  stock.c
+	  stock.c \
+	  ls_dev.c
 
 
 OBJ = $(SRC:.c=.o)
