@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:34:36 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/05 17:19:23 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/06 16:45:12 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,14 @@ char		*correct_path(char *s1, char *s2)
 {
 	char	*str;
 
-	str = ft_strdup(s1);
-	str = ft_strjoin(str, "/");
-	str = ft_strjoin(str, s2);
-	return (str);
+	if (strcmp(s1, "/dev"))
+	{
+		str = ft_strdup(s1);
+		str = ft_strjoin(str, "/");
+		str = ft_strjoin(str, s2);
+		return (str);
+	}
+	return (s1);
 }
 
 ll_list		*ll_copy_new_file(char *str, ll_list *head, struct stat filestat)

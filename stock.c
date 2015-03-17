@@ -6,7 +6,11 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:46:15 by jwalle            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2015/03/17 17:02:43 by jwalle           ###   ########.fr       */
+=======
+/*   Updated: 2015/03/06 16:31:47 by jwalle           ###   ########.fr       */
+>>>>>>> deaf210320afd4928cb36b15f6e409c8fde313cd
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +148,12 @@ char	file_type(struct stat filestat)
 
 void	min_maj(ll_list *current)
 {
+<<<<<<< HEAD
 	current->major = 0;
 	current->minor = 0;
+=======
+
+>>>>>>> deaf210320afd4928cb36b15f6e409c8fde313cd
 	current->major = major(current->device);
 	current->minor = minor(current->device);
 }
