@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:54:27 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/17 17:14:47 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/17 17:25:46 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ void	sub_print_l(ll_list *current, t_static2 *opt, max_len *len)
 					ft_putnnbr(len->uid_nb_len, current->uid_nb);
 }
 
-static void	print_maj_min(ll_list *current, max_len *len)
-{
-	ft_putnnbr(len->maj_len, current->major);
-	ft_putstr(",");
-	ft_putnnbr(len->min_len, current->minor);
-}
-
 void		print_l(ll_list *current, t_static2 *opt)
 {
 	max_len *len;
@@ -45,10 +38,7 @@ void		print_l(ll_list *current, t_static2 *opt)
 			if (!opt->G)
 				(!opt->n) ? ft_putnstr(len->gid_len, current->gid) :
 							ft_putnnbr(len->gid_nb_len, current->gid_nb);
-			if(!current->major)
-				ft_putnnbr(len->size_len, current->size);
-			else
-				print_maj_min(current, len);
+			ft_putnnbr(len->size_len, current->size);
 			ft_print_time(current->time);
 			(!current->isdir) ? ft_putstr(current->filename) :
 								ft_putstr_b(current->filename);

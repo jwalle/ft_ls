@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:54:27 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/17 16:47:59 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/17 17:26:53 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,7 @@ void		print_dev(ll_list *current, t_static2 *opt)
 			if (!opt->G)
 				(!opt->n) ? ft_putdevstr(len->gid_len, current->gid) :
 							ft_putdevnbr(len->gid_nb_len, current->gid_nb);
-			if(!current->major)
-				ft_putdevnbr(len->size_len, current->size);
-			else
-				print_maj_min(current);
+			print_maj_min(current);
 			ft_print_time(current->time);
 			(!current->isdir) ? ft_putstr(current->filename) :
 								ft_putstr_b(current->filename);

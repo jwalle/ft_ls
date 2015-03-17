@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:31:11 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/17 16:24:04 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/17 17:50:55 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int		choose_prog(t_static2 *opt, char *av)
 		}
 		else if (opt->l)
 		{
-			if(ft_strcmp(av, "/dev") == 0)
+			if(ft_strcmp(av, "/dev/") == 0)
 				print_dev(cur, opt);
 			else
 				print_l(cur, opt);
