@@ -32,6 +32,8 @@ void	ft_ls(t_static2 *opt, ll_list *cur)
 	}
 }
 
+void destr
+
 void	ft_parse(char **av, t_static2 *opt)
 {
 	char	**str;
@@ -59,6 +61,7 @@ void	ft_parse(char **av, t_static2 *opt)
 	j = -1;
 	while (str[++j])
 		print_parsed(str[j], opt, i--);
+	destroy_parse(str);
 }
 
 int		main(int ac, char **av)
