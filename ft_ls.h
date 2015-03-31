@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:36:17 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/17 17:15:24 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/31 15:47:24 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ typedef struct		element
 	int				size;
 	int				bsize;
 	time_t			time;
-	long			major;
-	long			minor;
+	int				major;
+	int				minor;
 	struct element	*next;
 }					ll_list;
 

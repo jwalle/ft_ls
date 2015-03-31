@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/14 16:20:14 by jwalle            #+#    #+#             */
-/*   Updated: 2014/12/08 03:32:21 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/25 14:57:22 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static char		*ft_bignum(char *str)
 {
 	str = "-2147483648";
 	return (str);
+{
+	int j;
 }
 
 static char		*ft_iszero(char *str)
