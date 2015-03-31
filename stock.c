@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:46:15 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/31 16:53:06 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/03/31 18:17:51 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	get_info(struct dirent *dp, ll_list *current, char *str)
 	if (S_ISLNK(filestat.st_mode))
 	{
 		current->islink = 1;
-		r = readlink(path, temp, filestat.st_size);
+		r = readlink(path, temp, sizeof(temp) - 1);
 		temp[r] = 0;
 		current->link_path = ft_strdup(temp);
 		free(temp);
