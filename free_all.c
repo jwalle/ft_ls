@@ -14,9 +14,16 @@
 
 void	free_all(ll_list *cur)
 {
-	free(cur->filename);
-	//	free(cur->perm);
-	//free(cur->uid);
-	free(cur->gid);
-	free(cur);
+	while (cur)
+	{
+		free(cur->filename);
+		free(cur->gid);
+		free(cur->perm);
+		//free(cur->uid);
+		//if (cur->link_path)
+		//	free(cur->link_path);
+
+		cur = cur->next;
+	}
+		free(cur);	
 }

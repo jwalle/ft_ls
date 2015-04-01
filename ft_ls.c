@@ -32,7 +32,17 @@ void	ft_ls(t_static2 *opt, ll_list *cur)
 	}
 }
 
-void destr
+void destroy_parse(char **str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+	}
+	free(str);
+}
 
 void	ft_parse(char **av, t_static2 *opt)
 {

@@ -51,6 +51,12 @@ char		*correct_path(char *s1, char *s2)
 		str = ft_strjoin(str, s2);
 		return (str);
 	}
+	if (strcmp(s1, "/dev/"))
+	{
+		str = ft_strdup(s1);
+		str = ft_strjoin(str, s2);
+		return (str);
+	}
 	return (s1);
 }
 

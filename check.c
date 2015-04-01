@@ -89,7 +89,7 @@ int		options3(char *av, t_static2 *opt)
 	int i;
 
 	i = 1;
-	while (av[i])
+	while (av[i])s
 	{
 		if (av[i] == 't')
 			opt->sort = 't';
@@ -117,6 +117,7 @@ int		choose_prog(t_static2 *opt, char *av)
 				ft_ls(opt, cur);
 			ft_putchar('\n');
 			ft_print_r(av, opt, cur);
+			//free_all(cur);
 		}
 		else if (opt->l)
 		{
