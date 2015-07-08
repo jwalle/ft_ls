@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 17:31:11 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/31 15:54:15 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/05/23 20:40:52 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		options(char *av, t_static2 *opt)
 		if (av[i] == 'l' || av[i] == 'G' || av[i] == 'g' || av[i] == 'n')
 			opt->l = 1;
 		if (av[i] == 'a')
-			opt->a = 1;
+			opt->a = 1;	
 		if (av[i] == 'r')
 		{
 			opt->r = 1;
@@ -89,7 +89,7 @@ int		options3(char *av, t_static2 *opt)
 	int i;
 
 	i = 1;
-	while (av[i])s
+	while (av[i])
 	{
 		if (av[i] == 't')
 			opt->sort = 't';

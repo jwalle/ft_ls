@@ -6,7 +6,7 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 18:49:43 by jwalle            #+#    #+#             */
-/*   Updated: 2014/12/08 03:32:07 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/05/20 18:02:00 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ char				*ft_strjoin(char const *s1, char const *s2)
 	while (s2[++s2_len])
 		str[s1_len + s2_len] = s2[s2_len];
 	str[s1_len + s2_len] = 0;
-	free((void *)s1);
-	//free((void *)s2);
+	//free((void*)s2);
 	return (str);
 }

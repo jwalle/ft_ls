@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_all.c                                         :+:      :+:    :+:   */
+/*   ft_lst_foreach.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/03/05 11:54:23 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/05 11:55:25 by jwalle           ###   ########.fr       */
+/*   Created: 2015/06/05 18:27:10 by jwalle            #+#    #+#             */
+/*   Updated: 2015/06/05 18:50:59 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-
-void destroy_info(ll_list *cur)
+void	ft_lst_foreach(t_list *lst, void (*f)())
 {
-	ft_strdel(&cur->filename);
-	ft_strdel(&cur->gid);
-	ft_strdel(&cur->perm);
-	ft_strdel(&cur->uid);
-	ft_strdel(&cur->perm);
-	ft_strdel(&cur->uid);
-	ft_strdel(&cur->gid);
-}
+	t_list		*tmp;
 
-
-void	free_all(ll_list *lst)
-{
-	if (lst)
+	tmp = lst;
+	while (tmp)
 	{
-		free_all(lst->next);
-		destroy_info(lst);
-		free(lst);
-		lst = NULL;
+		f(tmp->data);
+		tmp = tmp->next;
 	}
 }
-

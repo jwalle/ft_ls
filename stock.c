@@ -76,6 +76,7 @@ void	get_info(struct dirent *dp, ll_list *current, char *str)
 
 	temp = ft_strnew(256);
 	path = correct_path(str, dp->d_name);
+	//printf("str = %s, path = %s\n", str, path);
 	lstat(path, &filestat);
 	get_permission(filestat, current);
 	current->isdir = S_ISDIR(filestat.st_mode);
@@ -97,10 +98,11 @@ void	get_info(struct dirent *dp, ll_list *current, char *str)
 		r = readlink(path, temp, sizeof(temp) - 1);
 		temp[r] = 0;
 		current->link_path = ft_strdup(temp);
-		free(temp);
 	}
 	else
 		current->islink = 0;
+	free(temp);
+	free(path);
 }
 
 void	get_permission(struct stat filestat, ll_list *current)

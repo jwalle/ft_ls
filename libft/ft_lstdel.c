@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_all.c                                         :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/03/05 11:54:23 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/05 11:55:25 by jwalle           ###   ########.fr       */
+/*   Created: 2015/05/20 19:13:00 by jwalle            #+#    #+#             */
+/*   Updated: 2015/05/20 19:13:04 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-
-void destroy_info(ll_list *cur)
+void ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 {
-	ft_strdel(&cur->filename);
-	ft_strdel(&cur->gid);
-	ft_strdel(&cur->perm);
-	ft_strdel(&cur->uid);
-	ft_strdel(&cur->perm);
-	ft_strdel(&cur->uid);
-	ft_strdel(&cur->gid);
-}
-
-
-void	free_all(ll_list *lst)
-{
-	if (lst)
+	while (*alst)
 	{
-		free_all(lst->next);
-		destroy_info(lst);
-		free(lst);
-		lst = NULL;
+		del((*alst)->content, (*alst)->content_size);
+		free(*alst);
+		*alst = (*alst)->next;
 	}
+	*alst = NULL;
 }
-

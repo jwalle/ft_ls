@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_all.c                                         :+:      :+:    :+:   */
+/*   ft_lst_push.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/03/05 11:54:23 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/05 11:55:25 by jwalle           ###   ########.fr       */
+/*   Created: 2015/06/05 18:29:22 by jwalle            #+#    #+#             */
+/*   Updated: 2015/06/05 18:51:27 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-
-void destroy_info(ll_list *cur)
+t_list		*ft_lst_push(t_list *first, void *item)
 {
-	ft_strdel(&cur->filename);
-	ft_strdel(&cur->gid);
-	ft_strdel(&cur->perm);
-	ft_strdel(&cur->uid);
-	ft_strdel(&cur->perm);
-	ft_strdel(&cur->uid);
-	ft_strdel(&cur->gid);
-}
+	t_list	*tmp;
 
-
-void	free_all(ll_list *lst)
-{
-	if (lst)
+	if (!item)
+		return (NULL);
+	if (!first)
 	{
-		free_all(lst->next);
-		destroy_info(lst);
-		free(lst);
-		lst = NULL;
+		first = malloc(sizeof(t_list));
+		first->data = item;
+		first->next = NULL;
 	}
+	else
+	{
+		tmp = first;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = malloc(sizeof(t_list));
+		tmp->next->data = item;
+		tmp->next->next = NULL;
+	}
+	return (first);
 }
-

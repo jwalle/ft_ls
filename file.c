@@ -46,17 +46,18 @@ char		*correct_path(char *s1, char *s2)
 
 	if (strcmp(s1, "/dev"))
 	{
-		str = ft_strdup(s1);
-		str = ft_strjoin(str, "/");
-		str = ft_strjoin(str, s2);
+		//str = ft_strdup(s1);
+		//str = ft_strjoin(str, "/");
+		//str = ft_strjoin(str, s2);
+		str = ft_strjoin(ft_strjoin(s1, "/"),s2);
 		return (str);
 	}
-	if (strcmp(s1, "/dev/"))
-	{
-		str = ft_strdup(s1);
-		str = ft_strjoin(str, s2);
-		return (str);
-	}
+	// else if (strcmp(s1, "/dev/"))
+	// {
+	// 	str = ft_strdup(s1);
+	// 	str = ft_strjoin(str, s2);
+	// 	return (str);
+	// }
 	return (s1);
 }
 

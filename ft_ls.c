@@ -6,14 +6,17 @@
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/09 08:48:45 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/17 15:20:43 by jwalle           ###   ########.fr       */
+/*   Updated: 2015/05/27 18:52:49 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_ls(t_static2 *opt, ll_list *cur)
+void	ft_ls(t_static2 *opt, ll_list *list)
 {
+	ll_list *cur;
+
+	cur = list;
 	while (cur != NULL)
 	{
 		if (cur->filename[0] != '.' || opt->a)
@@ -30,6 +33,7 @@ void	ft_ls(t_static2 *opt, ll_list *cur)
 		}
 		cur = cur->next;
 	}
+	free_all(list);
 }
 
 void destroy_parse(char **str)
@@ -40,6 +44,7 @@ void destroy_parse(char **str)
 	while (str[i])
 	{
 		free(str[i]);
+		i++;
 	}
 	free(str);
 }
@@ -83,6 +88,8 @@ int		main(int ac, char **av)
 		choose_prog(&opt, ".");
 	if (ac == 2)
 	{
+		if (!ft_strcmp(av[1], "-1"))
+			av++;
 		if (is_opt(av[1]))
 		{
 			if (options(av[1], &opt) == 0)

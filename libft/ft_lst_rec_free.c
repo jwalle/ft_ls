@@ -1,38 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_all.c                                         :+:      :+:    :+:   */
+/*   ft_lst_rec_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/03/05 11:54:23 by jwalle            #+#    #+#             */
-/*   Updated: 2015/03/05 11:55:25 by jwalle           ###   ########.fr       */
+/*   Created: 2015/06/05 18:33:50 by jwalle            #+#    #+#             */
+/*   Updated: 2015/06/05 18:51:43 by jwalle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-
-void destroy_info(ll_list *cur)
+void	ft_lst_rec_free(t_list *first)
 {
-	ft_strdel(&cur->filename);
-	ft_strdel(&cur->gid);
-	ft_strdel(&cur->perm);
-	ft_strdel(&cur->uid);
-	ft_strdel(&cur->perm);
-	ft_strdel(&cur->uid);
-	ft_strdel(&cur->gid);
-}
-
-
-void	free_all(ll_list *lst)
-{
-	if (lst)
+	if (first)
 	{
-		free_all(lst->next);
-		destroy_info(lst);
-		free(lst);
-		lst = NULL;
+		ft_lst_rec_free(first->next);
+		free(first);
 	}
 }
-

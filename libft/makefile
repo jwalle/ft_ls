@@ -6,7 +6,7 @@
 #    By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/04 16:39:59 by jwalle            #+#    #+#              #
-#    Updated: 2014/11/22 17:39:42 by jwalle           ###   ########.fr        #
+#    Updated: 2015/06/05 18:53:52 by jwalle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,12 @@ SRC1 =	ft_putchar.c\
 		ft_lstnew.c\
 		ft_lstdelone.c\
 		ft_lstadd.c\
+		ft_lstmap.c\
+		ft_lstiter.c\
+		ft_lstdel.c\
+		ft_lst_foreach.c\
+		ft_lst_rec_free.c\
+		ft_lst_push.c\
 
 SRC2 =	ft_putchar.o\
 		ft_bzero.o\
@@ -125,13 +131,18 @@ SRC2 =	ft_putchar.o\
 		ft_lstnew.o\
 		ft_lstdelone.o\
 		ft_lstadd.o\
+		ft_lstmap.o\
+		ft_lstiter.o\
+		ft_lstdel.o\
+		ft_lst_foreach.o\
+		ft_lst_rec_free.o\
+		ft_lst_push.o\
 
-$(SOURCE) : ./src/
 
 all : $(NAME)
 
 $(NAME) :
-	gcc -c -Wall -Wextra -Werror -std=gnu99 $(SRC1) -I ./includes/
+	gcc -c -Wall -Wextra -Werror $(SRC1) -I ./
 	ar rc $(NAME) $(SRC2)
 	ranlib $(NAME)
 
