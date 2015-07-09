@@ -1,0 +1,81 @@
+==7231== Memcheck, a memory error detector
+==7231== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==7231== Using Valgrind-3.11.0.SVN and LibVEX; rerun with -h for copyright info
+==7231== Command: ./ft_ls -R ..
+==7231== Parent PID: 2293
+==7231== 
+--7231-- ./ft_ls:
+--7231-- dSYM directory is missing; consider using --dsymutil=yes
+--7231-- UNKNOWN host message [id 412, to mach_host_self(), reply 0x30f]
+--7231-- UNKNOWN host message [id 222, to mach_host_self(), reply 0x30f]
+--7231-- UNKNOWN mach_msg unhandled MACH_SEND_TRAILER option
+--7231-- UNKNOWN mach_msg unhandled MACH_SEND_TRAILER option (repeated 2 times)
+--7231-- UNKNOWN mach_msg unhandled MACH_SEND_TRAILER option (repeated 4 times)
+--7231-- UNKNOWN mach_msg unhandled MACH_SEND_TRAILER option (repeated 8 times)
+==7231== Conditional jump or move depends on uninitialised value(s)
+==7231==    at 0x1000039A5: ft_strdel (in ./ft_ls)
+==7231==    by 0x100001614: destroy_info (in ./ft_ls)
+==7231==    by 0x10000164F: free_all (in ./ft_ls)
+==7231==    by 0x100001646: free_all (in ./ft_ls)
+==7231==    by 0x100001646: free_all (in ./ft_ls)
+==7231==    by 0x100001646: free_all (in ./ft_ls)
+==7231==    by 0x100001646: free_all (in ./ft_ls)
+==7231==    by 0x100001646: free_all (in ./ft_ls)
+==7231==    by 0x100001646: free_all (in ./ft_ls)
+==7231==    by 0x100001646: free_all (in ./ft_ls)
+==7231==    by 0x100001646: free_all (in ./ft_ls)
+==7231==    by 0x100001646: free_all (in ./ft_ls)
+==7231== 
+==7231== Conditional jump or move depends on uninitialised value(s)
+==7231==    at 0x1000039A5: ft_strdel (in ./ft_ls)
+==7231==    by 0x100001614: destroy_info (in ./ft_ls)
+==7231==    by 0x10000164F: free_all (in ./ft_ls)
+==7231==    by 0x100001221: choose_prog (in ./ft_ls)
+==7231==    by 0x100002452: ft_print_r (in ./ft_ls)
+==7231==    by 0x1000011AC: choose_prog (in ./ft_ls)
+==7231==    by 0x100002452: ft_print_r (in ./ft_ls)
+==7231==    by 0x1000011AC: choose_prog (in ./ft_ls)
+==7231==    by 0x10000217C: print_parsed (in ./ft_ls)
+==7231==    by 0x100001917: ft_parse (in ./ft_ls)
+==7231==    by 0x100001A40: main (in ./ft_ls)
+==7231== 
+==7231== Conditional jump or move depends on uninitialised value(s)
+==7231==    at 0x1000018EC: ft_parse (in ./ft_ls)
+==7231==    by 0x100001A40: main (in ./ft_ls)
+==7231== 
+==7231== Conditional jump or move depends on uninitialised value(s)
+==7231==    at 0x1000017B3: destroy_parse (in ./ft_ls)
+==7231==    by 0x100001925: ft_parse (in ./ft_ls)
+==7231==    by 0x100001A40: main (in ./ft_ls)
+==7231== 
+==7231== 
+==7231== HEAP SUMMARY:
+==7231==     in use at exit: 45,928 bytes in 471 blocks
+==7231==   total heap usage: 51,817 allocs, 51,346 frees, 4,534,356 bytes allocated
+==7231== 
+==7231== 112 bytes in 1 blocks are definitely lost in loss record 93 of 133
+==7231==    at 0x10000BC11: calloc (in /Volumes/Data/nfs/zfs-student-4/users/2014/jwalle/.brew/Cellar/valgrind/HEAD/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==7231==    by 0x10048AC11: class_createInstance (in /usr/lib/libobjc.A.dylib)
+==7231==    by 0x1000EF920: _os_object_alloc_realized (in /usr/lib/system/libdispatch.dylib)
+==7231==    by 0x100440EF8: _xpc_pipe_create (in /usr/lib/system/libxpc.dylib)
+==7231==    by 0x10044742F: xpc_pipe_create (in /usr/lib/system/libxpc.dylib)
+==7231==    by 0x10028AF80: _od_xpc_pipe (in /usr/lib/system/libsystem_info.dylib)
+==7231==    by 0x10028AEC4: _od_running (in /usr/lib/system/libsystem_info.dylib)
+==7231==    by 0x10028AE58: ds_user_byuid (in /usr/lib/system/libsystem_info.dylib)
+==7231==    by 0x10028AC12: search_item_bynumber (in /usr/lib/system/libsystem_info.dylib)
+==7231==    by 0x10028AB4E: getpwuid (in /usr/lib/system/libsystem_info.dylib)
+==7231==    by 0x100002E43: get_info (in ./ft_ls)
+==7231==    by 0x100002CE0: ll_copy_new (in ./ft_ls)
+==7231== 
+==7231== LEAK SUMMARY:
+==7231==    definitely lost: 112 bytes in 1 blocks
+==7231==    indirectly lost: 0 bytes in 0 blocks
+==7231==      possibly lost: 0 bytes in 0 blocks
+==7231==    still reachable: 11,086 bytes in 55 blocks
+==7231==         suppressed: 34,730 bytes in 415 blocks
+==7231== Reachable blocks (those to which a pointer was found) are not shown.
+==7231== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==7231== 
+==7231== For counts of detected and suppressed errors, rerun with: -v
+==7231== Use --track-origins=yes to see where uninitialised values come from
+==7231== ERROR SUMMARY: 5419 errors from 5 contexts (suppressed: 21 from 21)

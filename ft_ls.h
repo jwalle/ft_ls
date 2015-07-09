@@ -61,6 +61,7 @@ typedef struct		element
 	struct element	*next;
 }					ll_list;
 
+
 typedef struct		s_static2
 {
 	char			sort;
@@ -78,7 +79,9 @@ typedef struct		s_static2
 	int				s;
 	int				v;
 	int				dft;
+	int 			end;
 }					t_static2;
+
 
 typedef	struct		directory	
 {

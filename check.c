@@ -14,20 +14,19 @@
 
 int		error(char c)
 {
-	if (c != 'l' && c != 'R' && c != 'a' && c != 'r' && c != 't'
-	&& c != 'A' && c != 'd' && c != 'g' && c != 'G' && c != 'i'
-	&& c != 'n' && c != 'S' && c != 'v' && c != 's' && c != '1' && c != '-')
+	char *str;
+
+	str = "l,R,a,r,t,A,d,g,G,i,n,S,v,s,1,-";
+	if (!strchr(str, c))
 	{
 		ft_putstr("ft_ls: illegal option -- '");
 		ft_putchar(c);
 		ft_putstr("'\n");
-		ft_putstr("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] ");
+		ft_putstr("usage: ls [-lRartAdgGinSvs1-] ");
 		ft_putstr("[file ...]\n");
 		return (1);
 	}
-	else
-		return (0);
-	return (1);
+	return (0);
 }
 
 int		options(char *av, t_static2 *opt)
@@ -43,7 +42,7 @@ int		options(char *av, t_static2 *opt)
 		if (av[i] == 'l' || av[i] == 'G' || av[i] == 'g' || av[i] == 'n')
 			opt->l = 1;
 		if (av[i] == 'a')
-			opt->a = 1;	
+			opt->a = 1;
 		if (av[i] == 'r')
 		{
 			opt->r = 1;
@@ -95,9 +94,26 @@ int		options3(char *av, t_static2 *opt)
 			opt->sort = 't';
 		if (av[i] == 'S')
 			opt->sort = 'S';
+		if (av[i] == '-')
+			opt->end = 1;
 		i++;
 	}
 	return (1);
+}
+
+int		check_perm(ll_list *cur)
+{
+	DIR	*dir;
+
+	dir = NULL;
+	if (cur->perm[0] == 'd' && (dir = opendir(cur->filename)) == NULL)
+		{
+			ft_putstr("ls: ");
+			ft_putstr(cur->filename);
+			ft_putstr(": Permission denied\n");
+			return (0);
+		}
+		return (1);
 }
 
 int		choose_prog(t_static2 *opt, char *av)
@@ -106,7 +122,7 @@ int		choose_prog(t_static2 *opt, char *av)
 
 	cur = ll_stock(av);
 	merge_sort(&cur, opt);
-	if (cur)
+	if (cur && check_perm(cur))
 	{
 		if (opt->R)
 		{
@@ -117,7 +133,6 @@ int		choose_prog(t_static2 *opt, char *av)
 				ft_ls(opt, cur);
 			ft_putchar('\n');
 			ft_print_r(av, opt, cur);
-			//free_all(cur);
 		}
 		else if (opt->l)
 		{
@@ -128,7 +143,7 @@ int		choose_prog(t_static2 *opt, char *av)
 		}
 		else
 			ft_ls(opt, cur);
-		free_all(cur);
 	}
+	free_all(cur);
 	return (1);
 }

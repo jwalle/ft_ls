@@ -6,7 +6,7 @@
 #    By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/04 16:39:59 by jwalle            #+#    #+#              #
-#    Updated: 2015/06/05 18:53:52 by jwalle           ###   ########.fr        #
+#    Updated: 2015/07/09 16:18:39 by jwalle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -142,15 +142,15 @@ SRC2 =	ft_putchar.o\
 all : $(NAME)
 
 $(NAME) :
-	gcc -c -Wall -Wextra -Werror $(SRC1) -I ./
-	ar rc $(NAME) $(SRC2)
-	ranlib $(NAME)
+	@gcc -c -Wall -Wextra -Werror $(SRC1) -I ./
+	@ar rc $(NAME) $(SRC2)
+	@ranlib $(NAME)
 
 clean:
-	/bin/rm -f $(SRC2)
+	@/bin/rm -f $(SRC2)
 
 fclean:
-	/bin/rm -f $(SRC2)
-	/bin/rm -f $(NAME)
+	@/bin/rm -f $(SRC2)
+	@/bin/rm -f $(NAME)
 
 re: fclean all

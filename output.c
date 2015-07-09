@@ -22,8 +22,10 @@ void	ft_putstr_b(char *str)
 void	print_parsed(char *str, t_static2 *opt, int i)
 {
 	struct stat	filestat;
+	DIR			*dir;
 
-	if (!stat(str, &filestat) && (opendir(str)))
+	dir = NULL;
+	if (!stat(str, &filestat) && (dir = opendir(str)))
 	{
 		ft_putstr(str);
 		ft_putstr(":\n");
@@ -31,6 +33,8 @@ void	print_parsed(char *str, t_static2 *opt, int i)
 	choose_prog(opt, str);
 	if (/*!stat(str, &filestat)*/i > 0)
 		ft_putchar('\n');
+	close_directory(dir);
+
 }
 
 void	print_folder(char *str)

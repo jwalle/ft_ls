@@ -26,7 +26,7 @@ void	ft_print_r(char *av, t_static2 *opt, ll_list *cur)
 				path = correct_path(av, cur->filename);
 				cur = cur->next;
 				choose_prog(opt, path);
-				free_all(cur);
+				free(path);
 			}
 			else
 				cur = cur->next;
@@ -34,4 +34,5 @@ void	ft_print_r(char *av, t_static2 *opt, ll_list *cur)
 		else
 			cur = cur->next;
 	}
+	free_all(cur);
 }

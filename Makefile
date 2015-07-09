@@ -1,4 +1,26 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2015/07/09 15:06:36 by jwalle            #+#    #+#              #
+#    Updated: 2015/07/09 16:17:34 by jwalle           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = ft_ls
+CFLAGS = -Wall -Werror -Wextra
+CC = GCC
+SRCDIR = .
+ODIR = ./objs/
+LIB = ./libft/libft.a
+SRCO = $(SRC:.c=.o)
+BLU = tput setaf 4
+GRN = tput setaf 2
+WHT = tput setaf 7
+RESET = tput sgr 0
 
 SRC = check.c \
 	  file.c \
@@ -11,24 +33,58 @@ SRC = check.c \
 	  sort.c \
 	  sort_st.c \
 	  stock.c \
-	  ls_dev.c
-
+	  ls_dev.c 
 
 OBJ = $(SRC:.c=.o)
 
-all : $(NAME)
+all : $(LIB) $(NAME)
 
+$(NAME) : objects
+	@$(BLU)
+	@echo "Making $(NAME)..."
+	@$(CC) $(addprefix $(ODIR), $(OBJ)) -o $(NAME) -L libft -lft
+	@$(GRN)
+	@echo "Done !"
+	@$(RESET)
 
-$(NAME) :
-	gcc -c -g -Wall -Werror -Wextra -I libft/includes/ $(SRC)
-	gcc -o $(NAME) -g $(OBJ) -L libft/ -lft
-	/bin/rm -f $(OBJ)
+objects:
+	@$(BLU)
+	@echo "making objects..."
+	@$(CC) $(CFLAGS) -c $(SRC) -I ./includes -I libft/includes
+	@mkdir -p $(ODIR)
+	@mv $(OBJ) $(ODIR)
+	@$(GRN)
+	@echo "Done !"
+	@$(RESET)
+
+$(LIB):
+	@$(BLU)
+	@echo "Compiling libft..."
+	@make -C libft
+	@$(GRN)
+	@echo "Done !"
+	@$(RESET)
 
 clean:
-	/bin/rm -f $(OBJ)
+	@make -C libft fclean
+	@$(BLU)
+	@echo "Cleaning objects..."
+	@rm -rf $(ODIR)
+	@$(GRN)
+	@echo "Done !"
+	@$(RESET)
 
-fclean:
-	/bin/rm -f $(OBJ)
-	/bin/rm -f $(NAME)
+fclean: clean
+	@$(BLU)
+	@echo "Deleting executable..."
+	@rm -rf $(NAME)
+	@$(GRN)
+	@echo "Done !"
+	@$(RESET)
 
 re: fclean all
+	@$(GRN)
+	@echo "Project reset and Rebuild !"
+	@$(RESET)
+
+

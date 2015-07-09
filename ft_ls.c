@@ -33,7 +33,6 @@ void	ft_ls(t_static2 *opt, ll_list *list)
 		}
 		cur = cur->next;
 	}
-	free_all(list);
 }
 
 void destroy_parse(char **str)

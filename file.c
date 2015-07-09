@@ -30,6 +30,7 @@ ll_list		*fail_open_directory(char *str)
 	else
 	{
 		head = ll_copy_new_file(str, head, filestat);
+		//close_directory(dir);
 		return (head);
 	}
 	return (NULL);
@@ -43,21 +44,15 @@ void		close_directory(DIR *dir)
 char		*correct_path(char *s1, char *s2)
 {
 	char	*str;
+	char 	*tmp;
 
 	if (strcmp(s1, "/dev"))
 	{
-		//str = ft_strdup(s1);
-		//str = ft_strjoin(str, "/");
-		//str = ft_strjoin(str, s2);
-		str = ft_strjoin(ft_strjoin(s1, "/"),s2);
+		tmp = ft_strjoin(s1, "/");
+		str = ft_strjoin(tmp,s2);
+		free(tmp);
 		return (str);
 	}
-	// else if (strcmp(s1, "/dev/"))
-	// {
-	// 	str = ft_strdup(s1);
-	// 	str = ft_strjoin(str, s2);
-	// 	return (str);
-	// }
 	return (s1);
 }
 
