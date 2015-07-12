@@ -6,12 +6,12 @@
 #    By: jwalle <jwalle@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/07/09 15:06:36 by jwalle            #+#    #+#              #
-#    Updated: 2015/07/09 16:17:34 by jwalle           ###   ########.fr        #
+#    Updated: 2015/07/12 11:13:54 by jwalle           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 CC = GCC
 SRCDIR = .
 ODIR = ./objs/

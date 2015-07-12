@@ -14,7 +14,7 @@
 
 
 void destroy_info(ll_list *cur)
-{
+{	
 	if (&cur->filename)
 		ft_strdel(&cur->filename);
 	if (&cur->gid)
@@ -23,8 +23,8 @@ void destroy_info(ll_list *cur)
 		ft_strdel(&cur->perm);
 	if (&cur->uid)
 		ft_strdel(&cur->uid);
-	if (cur->islink)
-		ft_strdel(&cur->link_path);
+	//if (cur->islink)
+	//	ft_strdel(&cur->link_path);
 }
 
 
@@ -38,4 +38,3 @@ void	free_all(ll_list *lst)
 		lst = NULL;
 	}
 }
-

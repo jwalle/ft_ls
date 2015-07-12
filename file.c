@@ -85,4 +85,5 @@ void		get_info_file(ll_list *current, struct stat filestat)
 	current->size = filestat.st_size;
 	current->bsize = filestat.st_blocks / 2;
 	current->time = filestat.st_mtime;
+	printf("%sPLPOPOPLPOPLPOPLPOPO_OLPP%s", RED, RESET);
 }

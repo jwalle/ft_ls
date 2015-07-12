@@ -107,13 +107,16 @@ int		check_perm(ll_list *cur)
 
 	dir = NULL;
 	if (cur->perm[0] == 'd' && (dir = opendir(cur->filename)) == NULL)
-		{
-			ft_putstr("ls: ");
-			ft_putstr(cur->filename);
-			ft_putstr(": Permission denied\n");
-			return (0);
-		}
-		return (1);
+	{
+		ft_putstr("ls: ");
+		ft_putstr(cur->filename);
+		ft_putstr(": Permission denied\n");
+		//printf("gid : %s, uid : %s, perm : %s", cur->gid, cur->uid, cur->perm);
+		return (0);
+	}
+	else if (dir)
+		close_directory(dir);
+	return (1);
 }
 
 int		choose_prog(t_static2 *opt, char *av)

@@ -14,9 +14,9 @@
 
 void	ft_putstr_b(char *str)
 {
-	//ft_putstr(BOLD);
+	ft_putstr(BOLD);
 	ft_putstr(str);
-	//ft_putstr(RESET);
+	ft_putstr(RESET);
 }
 
 void	print_parsed(char *str, t_static2 *opt, int i)
@@ -34,7 +34,6 @@ void	print_parsed(char *str, t_static2 *opt, int i)
 	if (/*!stat(str, &filestat)*/i > 0)
 		ft_putchar('\n');
 	close_directory(dir);
-
 }
 
 void	print_folder(char *str)
